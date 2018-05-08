@@ -15,8 +15,6 @@
     "package.json"
   ],
   "dependencies": {
-    "purescript-enums": "#compiler/0.12",
-    "purescript-foreign": "#compiler/0.12",
-    "purescript-nullable": "#compiler/0.12"
+    "purescript-web-events": "#compiler/0.12"
   }
 }
