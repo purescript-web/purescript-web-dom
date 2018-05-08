@@ -1,0 +1,22 @@
+{
+  "name": "purescript-web-dom",
+  "homepage": "https://github.com/purescript-web/purescript-web-dom",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/purescript-web/purescript-web-dom.git"
+  },
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "node_modules",
+    "output",
+    "bower.json",
+    "package.json"
+  ],
+  "dependencies": {
+    "purescript-enums": "#compiler/0.12",
+    "purescript-foreign": "#compiler/0.12",
+    "purescript-nullable": "#compiler/0.12"
+  }
+}
