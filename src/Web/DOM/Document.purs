@@ -1,6 +1,10 @@
 module Web.DOM.Document
   ( Document
   , read
+  , toNode
+  , toParentNode
+  , toNonElementParentNode
+  , toEventTarget
   , url
   , documentURI
   , origin
@@ -28,6 +32,7 @@ import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toMaybe, toNullable)
 import Effect (Effect)
 import Foreign (Foreign, F)
+import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.Comment (Comment)
 import Web.DOM.DocumentFragment (DocumentFragment)
 import Web.DOM.DocumentType (DocumentType)
@@ -35,13 +40,28 @@ import Web.DOM.Element (Element)
 import Web.DOM.HTMLCollection (HTMLCollection)
 import Web.DOM.Internal.FFI (unsafeReadProtoTagged)
 import Web.DOM.Internal.Types (Node)
+import Web.DOM.NonElementParentNode (NonElementParentNode)
+import Web.DOM.ParentNode (ParentNode)
 import Web.DOM.ProcessingInstruction (ProcessingInstruction)
 import Web.DOM.Text (Text)
+import Web.Event.EventTarget (EventTarget)
 
 foreign import data Document :: Type
 
 read :: Foreign -> F Document
 read = unsafeReadProtoTagged "Document"
+
+toNode :: Document -> Node
+toNode = unsafeCoerce
+
+toParentNode :: Document -> ParentNode
+toParentNode = unsafeCoerce
+
+toNonElementParentNode :: Document -> NonElementParentNode
+toNonElementParentNode = unsafeCoerce
+
+toEventTarget :: Document -> EventTarget
+toEventTarget = unsafeCoerce
 
 foreign import url :: Document -> Effect String
 foreign import documentURI :: Document -> Effect String

@@ -1,7 +1,10 @@
 module Web.DOM.Element
   ( module Exports
   , read
-  , ElementId(..)
+  , toNode
+  , toChildNode
+  , toParentNode
+  , toEventTarget
   , namespaceURI
   , prefix
   , localName
@@ -32,22 +35,35 @@ module Web.DOM.Element
 import Prelude
 
 import Data.Maybe (Maybe)
-import Data.Newtype (class Newtype)
 import Data.Nullable (Nullable, toMaybe, toNullable)
 import Effect (Effect)
 import Foreign (Foreign, F)
-import Web.DOM.Internal.Types (Element, HTMLCollection)
-import Web.DOM.Internal.Types (Element) as Exports
+import Unsafe.Coerce (unsafeCoerce)
+import Web.DOM.ChildNode (ChildNode)
 import Web.DOM.Internal.FFI (unsafeReadProtoTagged)
-
-newtype ElementId = ElementId String
-
-derive instance newtypeElementId :: Newtype ElementId _
-derive newtype instance eqElementId :: Eq ElementId
-derive newtype instance oOrdElementId :: Ord ElementId
+import Web.DOM.Internal.Types (Element) as Exports
+import Web.DOM.Internal.Types (Element, HTMLCollection, Node)
+import Web.DOM.NonDocumentTypeChildNode (NonDocumentTypeChildNode)
+import Web.DOM.ParentNode (ParentNode)
+import Web.Event.EventTarget (EventTarget)
 
 read :: Foreign -> F Element
 read = unsafeReadProtoTagged "Element"
+
+toNode :: Element -> Node
+toNode = unsafeCoerce
+
+toChildNode :: Element -> ChildNode
+toChildNode = unsafeCoerce
+
+toNonDocumentTypeChildNode :: Element -> NonDocumentTypeChildNode
+toNonDocumentTypeChildNode = unsafeCoerce
+
+toParentNode :: Element -> ParentNode
+toParentNode = unsafeCoerce
+
+toEventTarget :: Element -> EventTarget
+toEventTarget = unsafeCoerce
 
 namespaceURI :: Element -> Maybe String
 namespaceURI = toMaybe <<< _namespaceURI
@@ -60,8 +76,8 @@ foreign import _prefix :: Element -> Nullable String
 foreign import localName :: Element -> String
 foreign import tagName :: Element -> String
 
-foreign import id :: Element -> Effect ElementId
-foreign import setId :: ElementId -> Element -> Effect Unit
+foreign import id :: Element -> Effect String
+foreign import setId :: String -> Element -> Effect Unit
 foreign import className :: Element -> Effect String
 foreign import setClassName :: String -> Element -> Effect Unit
 

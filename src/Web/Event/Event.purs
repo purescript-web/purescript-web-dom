@@ -21,7 +21,7 @@ import Data.Maybe (Maybe, fromJust)
 import Data.Newtype (class Newtype)
 import Data.Nullable (Nullable, toMaybe)
 import Effect (Effect)
-import Web.DOM.Node (Node)
+import Web.DOM.Internal.Types (Node)
 import Web.Event.EventPhase (EventPhase)
 
 -- | Basic type for all DOM events.

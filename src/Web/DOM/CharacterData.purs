@@ -4,20 +4,20 @@ import Prelude
 
 import Effect (Effect)
 import Unsafe.Coerce (unsafeCoerce)
-import Web.DOM.Comment (Comment)
-import Web.DOM.ProcessingInstruction (ProcessingInstruction)
-import Web.DOM.Text (Text)
+import Web.DOM.ChildNode (ChildNode)
+import Web.DOM.Internal.Types (Node)
+import Web.DOM.NonDocumentTypeChildNode (NonDocumentTypeChildNode)
 
 foreign import data CharacterData :: Type
 
-fromText :: Text -> CharacterData
-fromText = unsafeCoerce
+toChildNode :: CharacterData -> ChildNode
+toChildNode = unsafeCoerce
 
-fromProcessingInstruction :: ProcessingInstruction -> CharacterData
-fromProcessingInstruction = unsafeCoerce
+toNonDocumentTypeChildNode :: CharacterData -> NonDocumentTypeChildNode
+toNonDocumentTypeChildNode = unsafeCoerce
 
-fromComment :: Comment -> CharacterData
-fromComment = unsafeCoerce
+toNode :: CharacterData -> Node
+toNode = unsafeCoerce
 
 foreign import data_ :: CharacterData -> Effect String
 

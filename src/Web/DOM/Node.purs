@@ -1,13 +1,6 @@
 module Web.DOM.Node
   ( module Exports
   , read
-  , fromDocument
-  , fromElement
-  , fromText
-  , fromComment
-  , fromProcessingInstruction
-  , fromDocumentFragment
-  , fromDocumentType
   , nodeType
   , nodeTypeIndex
   , nodeName
@@ -48,41 +41,19 @@ import Data.Nullable (Nullable, toMaybe)
 import Effect (Effect)
 import Foreign (Foreign, F)
 import Unsafe.Coerce (unsafeCoerce)
-import Web.DOM.Comment (Comment)
 import Web.DOM.Document (Document)
-import Web.DOM.DocumentFragment (DocumentFragment)
-import Web.DOM.DocumentType (DocumentType)
-import Web.DOM.NodeType (NodeType)
-import Web.DOM.ProcessingInstruction (ProcessingInstruction)
-import Web.DOM.Text (Text)
 import Web.DOM.Element (Element)
-import Web.DOM.Internal.Types (Node, NodeList)
-import Web.DOM.Internal.Types (Node) as Exports
 import Web.DOM.Internal.FFI (unsafeReadProtoTagged)
+import Web.DOM.Internal.Types (Node) as Exports
+import Web.DOM.Internal.Types (Node, NodeList)
+import Web.DOM.NodeType (NodeType)
+import Web.Event.EventTarget (EventTarget)
 
 read :: Foreign -> F Node
 read = unsafeReadProtoTagged "Node"
 
-fromDocument :: Document -> Node
-fromDocument = unsafeCoerce
-
-fromElement :: Element -> Node
-fromElement = unsafeCoerce
-
-fromText :: Text -> Node
-fromText = unsafeCoerce
-
-fromComment :: Comment -> Node
-fromComment = unsafeCoerce
-
-fromProcessingInstruction :: ProcessingInstruction -> Node
-fromProcessingInstruction = unsafeCoerce
-
-fromDocumentFragment :: DocumentFragment -> Node
-fromDocumentFragment = unsafeCoerce
-
-fromDocumentType :: DocumentType -> Node
-fromDocumentType = unsafeCoerce
+toEventTarget :: Node -> EventTarget
+toEventTarget = unsafeCoerce
 
 -- | The type of a node.
 nodeType :: Partial => Node -> NodeType

@@ -7,9 +7,6 @@ import Data.Bifunctor (lmap)
 import Data.Either (Either(..))
 import Effect (Effect)
 import Foreign (F, Foreign, ForeignError(..))
-import Unsafe.Coerce (unsafeCoerce)
-import Web.DOM.Document (Document)
-import Web.DOM.Element (Element)
 import Web.Event.Event (Event, EventType)
 
 -- | A DOM item that can emit events.
@@ -17,12 +14,6 @@ foreign import data EventTarget :: Type
 
 read :: Foreign -> F EventTarget
 read = except <<< lmap (pure <<< ForeignError) <<< _readEventTarget Left Right
-
-fromDocument :: Document -> EventTarget
-fromDocument = unsafeCoerce
-
-fromElement :: Element -> EventTarget
-fromElement = unsafeCoerce
 
 foreign import _readEventTarget
   :: (forall a b. a -> Either a b)

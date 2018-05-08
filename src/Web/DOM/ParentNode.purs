@@ -1,8 +1,5 @@
 module Web.DOM.ParentNode
   ( ParentNode
-  , fromDocument
-  , fromDocumentFragment
-  , fromElement
   , children
   , firstElementChild
   , lastElementChild
@@ -18,23 +15,11 @@ import Data.Maybe (Maybe)
 import Data.Newtype (class Newtype)
 import Data.Nullable (Nullable, toMaybe)
 import Effect (Effect)
-import Unsafe.Coerce (unsafeCoerce)
-import Web.DOM.Document (Document)
-import Web.DOM.DocumentFragment (DocumentFragment)
-import Web.DOM.Element (Element)
+import Web.DOM.Internal.Types (Element)
 import Web.DOM.HTMLCollection (HTMLCollection)
 import Web.DOM.NodeList (NodeList)
 
 foreign import data ParentNode :: Type
-
-fromDocument :: Document -> ParentNode
-fromDocument = unsafeCoerce
-
-fromDocumentFragment :: DocumentFragment -> ParentNode
-fromDocumentFragment = unsafeCoerce
-
-fromElement :: Element -> ParentNode
-fromElement = unsafeCoerce
 
 -- | The child elements for the node.
 foreign import children :: ParentNode -> Effect HTMLCollection
