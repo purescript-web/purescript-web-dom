@@ -1,4 +1,4 @@
-module Web.DOM.ClassList
+module Web.DOM.DOMTokenList
   ( DOMTokenList
   , add
   , contains
