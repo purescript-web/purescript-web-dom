@@ -1,8 +1,13 @@
 module Web.DOM.Element
   ( module Exports
-  , read
+  , fromNode
+  , fromChildNode
+  , fromNonDocumentTypeChildNode
+  , fromParentNode
+  , fromEventTarget
   , toNode
   , toChildNode
+  , toNonDocumentTypeChildNode
   , toParentNode
   , toEventTarget
   , namespaceURI
@@ -37,18 +42,29 @@ import Prelude
 import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toMaybe, toNullable)
 import Effect (Effect)
-import Foreign (Foreign, F)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.ChildNode (ChildNode)
-import Web.DOM.Internal.FFI (unsafeReadProtoTagged)
 import Web.DOM.Internal.Types (Element) as Exports
 import Web.DOM.Internal.Types (Element, HTMLCollection, Node)
 import Web.DOM.NonDocumentTypeChildNode (NonDocumentTypeChildNode)
 import Web.DOM.ParentNode (ParentNode)
 import Web.Event.EventTarget (EventTarget)
+import Web.Internal.FFI (unsafeReadProtoTagged)
 
-read :: Foreign -> F Element
-read = unsafeReadProtoTagged "Element"
+fromNode :: Node -> Maybe Element
+fromNode = unsafeReadProtoTagged "Element"
+
+fromChildNode :: ChildNode -> Maybe Element
+fromChildNode = unsafeReadProtoTagged "Element"
+
+fromNonDocumentTypeChildNode :: NonDocumentTypeChildNode -> Maybe Element
+fromNonDocumentTypeChildNode = unsafeReadProtoTagged "Element"
+
+fromParentNode :: ParentNode -> Maybe Element
+fromParentNode = unsafeReadProtoTagged "Element"
+
+fromEventTarget :: EventTarget -> Maybe Element
+fromEventTarget = unsafeReadProtoTagged "Element"
 
 toNode :: Element -> Node
 toNode = unsafeCoerce

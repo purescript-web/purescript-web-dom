@@ -1,6 +1,7 @@
 module Web.DOM.Node
   ( module Exports
-  , read
+  , fromEventTarget
+  , toEventTarget
   , nodeType
   , nodeTypeIndex
   , nodeName
@@ -39,18 +40,17 @@ import Data.Enum (toEnum)
 import Data.Maybe (Maybe, fromJust)
 import Data.Nullable (Nullable, toMaybe)
 import Effect (Effect)
-import Foreign (Foreign, F)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.Document (Document)
 import Web.DOM.Element (Element)
-import Web.DOM.Internal.FFI (unsafeReadProtoTagged)
 import Web.DOM.Internal.Types (Node) as Exports
 import Web.DOM.Internal.Types (Node, NodeList)
 import Web.DOM.NodeType (NodeType)
 import Web.Event.EventTarget (EventTarget)
+import Web.Internal.FFI (unsafeReadProtoTagged)
 
-read :: Foreign -> F Node
-read = unsafeReadProtoTagged "Node"
+fromEventTarget :: EventTarget -> Maybe Node
+fromEventTarget = unsafeReadProtoTagged "Node"
 
 toEventTarget :: Node -> EventTarget
 toEventTarget = unsafeCoerce
