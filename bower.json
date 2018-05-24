@@ -15,6 +15,6 @@
     "package.json"
   ],
   "dependencies": {
-    "purescript-web-events": "#compiler/0.12"
+    "purescript-web-events": "^1.0.0"
   }
 }
