@@ -29,7 +29,7 @@ fromEventTarget = unsafeReadProtoTagged "DocumentFragment"
 toNode :: DocumentFragment -> Node
 toNode = unsafeCoerce
 
-toChildNode :: DocumentFragment -> Node
+toChildNode :: DocumentFragment -> ChildNode
 toChildNode = unsafeCoerce
 
 toParentNode :: DocumentFragment -> ParentNode

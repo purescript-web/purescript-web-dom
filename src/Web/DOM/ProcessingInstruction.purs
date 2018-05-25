@@ -39,7 +39,7 @@ toChildNode = unsafeCoerce
 toNonDocumentTypeChildNode :: ProcessingInstruction -> NonDocumentTypeChildNode
 toNonDocumentTypeChildNode = unsafeCoerce
 
-toEventTarget :: Node -> ProcessingInstruction
+toEventTarget :: ProcessingInstruction -> EventTarget
 toEventTarget = unsafeCoerce
 
 foreign import target :: ProcessingInstruction -> Effect String

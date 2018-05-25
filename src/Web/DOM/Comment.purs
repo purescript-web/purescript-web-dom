@@ -12,7 +12,7 @@ import Web.Internal.FFI (unsafeReadProtoTagged)
 foreign import data Comment :: Type
 
 fromCharacterData :: CharacterData -> Maybe Comment
-fromCharacterData = unsafeCoerce
+fromCharacterData = unsafeReadProtoTagged "Comment"
 
 fromNode :: Node -> Maybe Comment
 fromNode = unsafeReadProtoTagged "Comment"
@@ -26,7 +26,7 @@ fromNonDocumentTypeChildNode = unsafeReadProtoTagged "Comment"
 fromEventTarget :: EventTarget -> Maybe Comment
 fromEventTarget = unsafeReadProtoTagged "Comment"
 
-toCharacterData :: Comment -> Comment
+toCharacterData :: Comment -> CharacterData
 toCharacterData = unsafeCoerce
 
 toNode :: Comment -> Node
@@ -38,5 +38,5 @@ toChildNode = unsafeCoerce
 toNonDocumentTypeChildNode :: Comment -> NonDocumentTypeChildNode
 toNonDocumentTypeChildNode = unsafeCoerce
 
-toEventTarget :: Node -> Comment
+toEventTarget :: Comment -> EventTarget
 toEventTarget = unsafeCoerce

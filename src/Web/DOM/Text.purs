@@ -39,7 +39,7 @@ toChildNode = unsafeCoerce
 toNonDocumentTypeChildNode :: Text -> NonDocumentTypeChildNode
 toNonDocumentTypeChildNode = unsafeCoerce
 
-toEventTarget :: Node -> Text
+toEventTarget :: Text -> EventTarget
 toEventTarget = unsafeCoerce
 
 foreign import splitText :: Int -> Text -> Effect Text
