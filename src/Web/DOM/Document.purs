@@ -40,7 +40,7 @@ import Web.DOM.DocumentFragment (DocumentFragment)
 import Web.DOM.DocumentType (DocumentType)
 import Web.DOM.Element (Element)
 import Web.DOM.HTMLCollection (HTMLCollection)
-import Web.DOM.Internal.Types (Node)
+import Web.DOM.Internal.Types (Node, StyleSheetList)
 import Web.DOM.NonElementParentNode (NonElementParentNode)
 import Web.DOM.ParentNode (ParentNode)
 import Web.DOM.ProcessingInstruction (ProcessingInstruction)
@@ -80,6 +80,7 @@ foreign import origin :: Document -> Effect String
 foreign import compatMode :: Document -> Effect String
 foreign import characterSet :: Document -> Effect String
 foreign import contentType :: Document -> Effect String
+foreign import styleSheets :: Document -> Effect StyleSheetList
 
 doctype :: Document -> Effect (Maybe DocumentType)
 doctype = map toMaybe <<< _doctype

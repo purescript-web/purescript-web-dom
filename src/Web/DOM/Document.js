@@ -14,6 +14,7 @@ exports.origin = getEffProp("origin");
 exports.compatMode = getEffProp("compatMode");
 exports.characterSet = getEffProp("characterSet");
 exports.contentType = getEffProp("contentType");
+exports.styleSheets = getEffProp("styleSheets");
 
 exports._doctype = getEffProp("doctype");
 exports._documentElement = getEffProp("documentElement");
