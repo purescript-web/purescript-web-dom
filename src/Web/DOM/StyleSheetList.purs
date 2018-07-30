@@ -10,7 +10,6 @@ import Prelude
 import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toMaybe)
 import Effect (Effect)
-import Web.DOM.Document (Document)
 import Web.DOM.Internal.Types (CSSStyleSheet, StyleSheetList)
 import Web.DOM.Internal.Types (StyleSheetList) as Exports
 
