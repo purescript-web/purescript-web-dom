@@ -168,3 +168,19 @@ exports.clientHeight = function (el) {
     return el.clientHeight;
   };
 };
+
+exports.matches = function (selector) {
+  return function(el) {
+    return function() {
+      return el.matches(selector);
+    };
+  };
+};
+
+exports._closest = function (selector) {
+  return function(el) {
+    return function() {
+      return el.closest(selector);
+    };
+  };
+};
