@@ -35,6 +35,8 @@ module Web.DOM.Element
   , clientLeft
   , clientWidth
   , clientHeight
+  , matches
+  , closest
   ) where
 
 import Prelude
@@ -127,3 +129,10 @@ foreign import clientTop :: Element -> Effect Number
 foreign import clientLeft :: Element -> Effect Number
 foreign import clientWidth :: Element -> Effect Number
 foreign import clientHeight :: Element -> Effect Number
+
+foreign import matches :: String -> Element -> Effect Boolean
+
+foreign import _closest :: String -> Element -> Effect (Nullable Element)
+
+closest :: String -> Element -> Effect (Maybe Element)
+closest selector = map toMaybe <<< _closest selector
