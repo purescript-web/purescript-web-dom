@@ -121,9 +121,12 @@ nextSibling = map toMaybe <<< _nextSibling
 
 foreign import _nextSibling :: Node -> Effect (Nullable Node)
 
--- | If the node type is text, comment, or processing instruction this is the
--- | node's data, or null in all other cases.
-foreign import nodeValue :: Node -> Effect String
+-- | If the node type is text, comment, or processing instruction this is
+-- | `Just` the node's data, or `Nothing` in all other cases.
+nodeValue :: Node -> Effect (Maybe String)
+nodeValue = map toMaybe <<< _nodeValue
+
+foreign import _nodeValue :: Node -> Effect (Nullable String)
 
 -- | If the node type is text, comment, or processing instruction this allows
 -- | the node's data to be changed, or has no effect in all other cases.

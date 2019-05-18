@@ -40,7 +40,7 @@ exports._previousSibling = getEffProp("previousSibling");
 
 exports._nextSibling = getEffProp("nextSibling");
 
-exports.nodeValue = getEffProp("nodeValue");
+exports._nodeValue = getEffProp("nodeValue");
 
 exports.setNodeValue = function (value) {
   return function (node) {
