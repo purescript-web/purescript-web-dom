@@ -27,7 +27,7 @@ type MutationObserverInitFields =
   )
 
 foreign import mutationObserver
-  :: (MutationRecord -> MutationObserver -> Effect Unit)
+  :: ((Array MutationRecord) -> MutationObserver -> Effect Unit)
   -> Effect MutationObserver
 
 foreign import _observe :: forall r. Node -> Record r -> MutationObserver -> Effect Unit
