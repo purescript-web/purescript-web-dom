@@ -133,6 +133,42 @@ exports.setScrollLeft = function (scrollLeft) {
   };
 };
 
+exports._scroll = function (scrollToOptions) {
+  return function (node) {
+    return function () {
+      node.scroll(scrollToOptions);
+      return {};
+    };
+  };
+};
+
+exports._scrollTo = function (scrollToOptions) {
+  return function (node) {
+    return function () {
+      node.scrollTo(scrollToOptions);
+      return {};
+    };
+  };
+};
+
+exports._scrollBy = function (scrollToOptions) {
+  return function (node) {
+    return function () {
+      node.scrollBy(scrollToOptions);
+      return {};
+    };
+  };
+};
+
+exports._scrollIntoView = function (scrollIntoViewOptions) {
+  return function (node) {
+    return function () {
+      node.scrollIntoView(scrollIntoViewOptions);
+      return {};
+    };
+  };
+};
+
 exports.scrollWidth = function (el) {
   return function () {
     return el.scrollWidth;

@@ -29,6 +29,14 @@ module Web.DOM.Element
   , setScrollTop
   , scrollLeft
   , setScrollLeft
+  , ScrollToOptions
+  , ScrollBehavior
+  , ScrollAlignment
+  , scroll
+  , scrollTo
+  , scrollBy
+  , ScrollIntoViewOptions
+  , scrollIntoView
   , scrollWidth
   , scrollHeight
   , clientTop
@@ -120,6 +128,79 @@ foreign import setScrollTop :: Number -> Element -> Effect Unit
 
 foreign import scrollLeft :: Element -> Effect Number
 foreign import setScrollLeft :: Number -> Element -> Effect Unit
+
+data ScrollBehavior = Auto | Smooth
+
+stringScrollBehavior :: ScrollBehavior -> String
+stringScrollBehavior Auto = "auto"
+stringScrollBehavior Smooth = "smooth"
+
+type ScrollToOptions =
+  { top :: Number
+  , left :: Number
+  , behavior :: ScrollBehavior
+  }
+
+type ScrollToOptions_ =
+  { top :: Number
+  , left :: Number
+  , behavior :: String
+  }
+
+foreign import _scroll :: Element -> ScrollToOptions_ -> Effect Unit
+
+scroll :: Element -> ScrollToOptions -> Effect Unit
+scroll elem _opts = _scroll elem opts
+  where
+    opts = let { top,left, behavior } = _opts
+           in { top, left, behavior: stringScrollBehavior behavior }
+
+foreign import _scrollTo :: Element -> ScrollToOptions_ -> Effect Unit
+
+scrollTo :: Element -> ScrollToOptions -> Effect Unit
+scrollTo elem _opts = _scrollTo elem opts
+  where
+    opts = let { top,left, behavior } = _opts
+           in { top, left, behavior: stringScrollBehavior behavior }
+
+foreign import _scrollBy :: Element -> ScrollToOptions_ -> Effect Unit
+
+scrollBy :: Element -> ScrollToOptions -> Effect Unit
+scrollBy elem _opts = _scrollBy elem opts
+  where
+    opts = let { top,left, behavior } = _opts
+           in { top, left, behavior: stringScrollBehavior behavior }
+
+data ScrollAlignment = Start | Center | End | Nearest
+
+stringScrollAlignment :: ScrollAlignment -> String
+stringScrollAlignment Start = "start"
+stringScrollAlignment Center = "center"
+stringScrollAlignment End = "end"
+stringScrollAlignment Nearest = "nearest"
+
+type ScrollIntoViewOptions =
+  { behavior :: ScrollBehavior
+  , block :: ScrollAlignment
+  , inline :: ScrollAlignment
+  }
+
+type ScrollIntoViewOptions_ =
+  { behavior :: String
+  , block :: String
+  , inline :: String
+  }
+
+foreign import _scrollIntoView :: Element -> ScrollIntoViewOptions_ -> Effect Unit
+
+scrollIntoView :: Element -> ScrollIntoViewOptions -> Effect Unit
+scrollIntoView elem _opts = _scrollIntoView elem opts
+  where
+    opts = let { behavior, block, inline } = _opts
+            in { behavior: stringScrollBehavior behavior
+               , block: stringScrollAlignment block
+               , inline: stringScrollAlignment inline
+               }
 
 foreign import scrollWidth :: Element -> Effect Number
 foreign import scrollHeight :: Element -> Effect Number
