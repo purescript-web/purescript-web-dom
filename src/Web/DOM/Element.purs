@@ -147,20 +147,20 @@ type ScrollToOptions_ =
   , behavior :: String
   }
 
-foreign import _scroll :: Element -> ScrollToOptions_ -> Effect Unit
+foreign import _scroll :: ScrollToOptions_ -> Element -> Effect Unit
 
-scroll :: Element -> ScrollToOptions -> Effect Unit
-scroll elem opts = _scroll elem (opts { behavior = stringScrollBehavior opts.behavior })
+scroll :: ScrollToOptions -> Element -> Effect Unit
+scroll opts = _scroll (opts { behavior = stringScrollBehavior opts.behavior })
 
-foreign import _scrollTo :: Element -> ScrollToOptions_ -> Effect Unit
+foreign import _scrollTo :: ScrollToOptions_ -> Element -> Effect Unit
 
-scrollTo :: Element -> ScrollToOptions -> Effect Unit
-scrollTo elem opts = _scrollTo elem (opts { behavior = stringScrollBehavior opts.behavior })
+scrollTo :: ScrollToOptions -> Element -> Effect Unit
+scrollTo opts = _scrollTo (opts { behavior = stringScrollBehavior opts.behavior })
 
-foreign import _scrollBy :: Element -> ScrollToOptions_ -> Effect Unit
+foreign import _scrollBy :: ScrollToOptions_ -> Element -> Effect Unit
 
-scrollBy :: Element -> ScrollToOptions -> Effect Unit
-scrollBy elem opts = _scrollBy elem (opts { behavior = stringScrollBehavior opts.behavior })
+scrollBy :: ScrollToOptions -> Element -> Effect Unit
+scrollBy opts = _scrollBy (opts { behavior = stringScrollBehavior opts.behavior })
 
 data ScrollAlignment = Start | Center | End | Nearest
 
@@ -182,10 +182,10 @@ type ScrollIntoViewOptions_ =
   , inline :: String
   }
 
-foreign import _scrollIntoView :: Element -> ScrollIntoViewOptions_ -> Effect Unit
+foreign import _scrollIntoView :: ScrollIntoViewOptions_ -> Element -> Effect Unit
 
-scrollIntoView :: Element -> ScrollIntoViewOptions -> Effect Unit
-scrollIntoView elem _opts = _scrollIntoView elem opts
+scrollIntoView :: ScrollIntoViewOptions -> Element -> Effect Unit
+scrollIntoView _opts = _scrollIntoView opts
   where
     opts = { behavior: stringScrollBehavior _opts.behavior
            , block: stringScrollAlignment _opts.block
