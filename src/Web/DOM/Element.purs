@@ -30,8 +30,8 @@ module Web.DOM.Element
   , scrollLeft
   , setScrollLeft
   , ScrollToOptions
-  , ScrollBehavior
-  , ScrollAlignment
+  , ScrollBehavior(..)
+  , ScrollAlignment(..)
   , scroll
   , scrollTo
   , scrollBy
