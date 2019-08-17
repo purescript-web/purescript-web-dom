@@ -32,6 +32,12 @@ exports.className = function (node) {
   };
 };
 
+exports.classList = function (element) {
+  return function () {
+    return element.classList;
+  };
+};
+
 exports.setClassName = function (className) {
   return function (node) {
     return function () {
