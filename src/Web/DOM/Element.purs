@@ -17,6 +17,7 @@ module Web.DOM.Element
   , id
   , setId
   , className
+  , classList
   , setClassName
   , getElementsByTagName
   , getElementsByTagNameNS
@@ -44,6 +45,7 @@ import Data.Nullable (Nullable, toMaybe, toNullable)
 import Effect (Effect)
 import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.ChildNode (ChildNode)
+import Web.DOM.DOMTokenList (DOMTokenList)
 import Web.DOM.Internal.Types (Element) as Exports
 import Web.DOM.Internal.Types (Element, HTMLCollection, Node)
 import Web.DOM.NonDocumentTypeChildNode (NonDocumentTypeChildNode)
@@ -95,6 +97,7 @@ foreign import tagName :: Element -> String
 foreign import id :: Element -> Effect String
 foreign import setId :: String -> Element -> Effect Unit
 foreign import className :: Element -> Effect String
+foreign import classList :: Element -> Effect DOMTokenList
 foreign import setClassName :: String -> Element -> Effect Unit
 
 foreign import getElementsByTagName :: String -> Element -> Effect HTMLCollection
