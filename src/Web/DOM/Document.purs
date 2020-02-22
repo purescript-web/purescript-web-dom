@@ -1,3 +1,11 @@
+-- | This module provides type definitions and implementations for the
+-- | `Document` interface, which is part of the W3C DOM API.
+-- |
+-- | The DOM API doesn't actually give you any way of getting hold of a
+-- | `Document` by itself. To do that, you will need to look at one of the
+-- | other APIs which build on the DOM API. For example, `window.document` is
+-- | part of the HTML5 API, and so the relevant binding can be found in
+-- | `Web.HTML.Window`, which is part of the `purescript-web-html` package.
 module Web.DOM.Document
   ( Document
   , fromNode
