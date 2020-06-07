@@ -35,6 +35,20 @@ instance boundedEnumNodeType :: BoundedEnum NodeType where
   cardinality = Cardinality 12
   toEnum = toEnumNodeType
   fromEnum = fromEnumNodeType
+ 
+instance showNodeType :: Show NodeType where
+  show ElementNode = "ElementNode"
+  show AttributeNode = "AttributeNode"
+  show TextNode = "TextNode"
+  show CDATASectionNode = "CDATASectionNode"
+  show EntityReferenceNode = "EntityReferenceNode"
+  show EntityNode = "EntityNode"
+  show ProcessingInstructionNode = "ProcessingInstructionNode"
+  show CommentNode = "CommentNode"
+  show DocumentNode = "DocumentNode"
+  show DocumentTypeNode = "DocumentTypeNode"
+  show DocumentFragmentNode = "DocumentFragmentNode"
+  show NotationNode = "NotationNode"
 
 toEnumNodeType :: Int -> Maybe NodeType
 toEnumNodeType 1 = Just ElementNode
