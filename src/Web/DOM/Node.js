@@ -46,7 +46,6 @@ exports.setNodeValue = function (value) {
   return function (node) {
     return function () {
       node.nodeValue = value;
-      return {};
     };
   };
 };
@@ -57,7 +56,6 @@ exports.setTextContent = function (value) {
   return function (node) {
     return function () {
       node.textContent = value;
-      return {};
     };
   };
 };
@@ -65,7 +63,6 @@ exports.setTextContent = function (value) {
 exports.normalize = function (node) {
   return function () {
     node.normalize();
-    return {};
   };
 };
 

@@ -21,7 +21,6 @@ exports.setId = function (id) {
   return function (node) {
     return function () {
       node.id = id;
-      return {};
     };
   };
 };
@@ -42,7 +41,6 @@ exports.setClassName = function (className) {
   return function (node) {
     return function () {
       node.className = className;
-      return {};
     };
   };
 };
@@ -78,7 +76,6 @@ exports.setAttribute = function (name) {
     return function (element) {
       return function () {
         element.setAttribute(name, value);
-        return {};
       };
     };
   };
@@ -104,7 +101,6 @@ exports.removeAttribute = function (name) {
   return function (element) {
     return function () {
       element.removeAttribute(name);
-      return {};
     };
   };
 };
@@ -121,7 +117,6 @@ exports.setScrollTop = function (scrollTop) {
   return function (node) {
     return function () {
       node.scrollTop = scrollTop;
-      return {};
     };
   };
 };
@@ -136,7 +131,6 @@ exports.setScrollLeft = function (scrollLeft) {
   return function (node) {
     return function () {
       node.scrollLeft = scrollLeft;
-      return {};
     };
   };
 };
