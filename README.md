@@ -8,7 +8,7 @@ Type definitions and low level interface implementations for the [W3C DOM API](h
 ## Installation
 
 ```
-bower install purescript-web-dom
+spago install web-dom
 ```
 
 ## Documentation
