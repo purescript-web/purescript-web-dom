@@ -26,6 +26,10 @@ module Web.DOM.Element
   , getAttribute
   , hasAttribute
   , removeAttribute
+  , innerHTML
+  , setInnerHTML
+  , innerText
+  , setInnerText
   , scrollTop
   , setScrollTop
   , scrollLeft
@@ -117,6 +121,12 @@ getAttribute attr = map toMaybe <<< _getAttribute attr
 foreign import _getAttribute :: String -> Element -> Effect (Nullable String)
 foreign import hasAttribute :: String -> Element -> Effect Boolean
 foreign import removeAttribute :: String -> Element -> Effect Unit
+
+foreign import innerHTML :: Element -> Effect String
+foreign import setInnerHTML :: String -> Element -> Effect Unit
+
+foreign import innerText :: Element -> Effect String
+foreign import setInnerText :: String -> Element -> Effect Unit
 
 foreign import scrollTop :: Element -> Effect Number
 foreign import setScrollTop :: Number -> Element -> Effect Unit
