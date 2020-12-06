@@ -8,7 +8,7 @@ Type definitions and low level interface implementations for the [WHATWG DOM Liv
 ## Installation
 
 ```
-bower install purescript-web-dom
+spago install web-dom
 ```
 
 ## Documentation
