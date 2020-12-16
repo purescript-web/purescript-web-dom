@@ -130,7 +130,7 @@ exports.insertBefore = function (node1) {
   return function (node2) {
     return function (parent) {
       return function () {
-        return parent.insertBefore(node1, node2);
+        parent.insertBefore(node1, node2);
       };
     };
   };
@@ -139,7 +139,7 @@ exports.insertBefore = function (node1) {
 exports.appendChild = function (node) {
   return function (parent) {
     return function () {
-      return parent.appendChild(node);
+      parent.appendChild(node);
     };
   };
 };
@@ -148,7 +148,7 @@ exports.replaceChild = function (newChild) {
   return function (oldChild) {
     return function (parent) {
       return function () {
-        return parent.replaceChild(newChild, oldChild);
+        parent.replaceChild(newChild, oldChild);
       };
     };
   };
@@ -157,7 +157,7 @@ exports.replaceChild = function (newChild) {
 exports.removeChild = function (node) {
   return function (parent) {
     return function () {
-      return parent.removeChild(node);
+      parent.removeChild(node);
     };
   };
 };

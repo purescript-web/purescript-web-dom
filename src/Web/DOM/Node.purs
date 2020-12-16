@@ -176,14 +176,14 @@ foreign import _lookupNamespaceURI :: String -> Node -> Effect (Nullable String)
 foreign import isDefaultNamespace :: String -> Node -> Effect Boolean
 
 -- | Inserts the first node before the second as a child of the third node.
-foreign import insertBefore :: Node -> Node -> Node -> Effect Node
+foreign import insertBefore :: Node -> Node -> Node -> Effect Unit
 
 -- | Appends the first node to the child node list of the second node.
-foreign import appendChild :: Node -> Node -> Effect Node
+foreign import appendChild :: Node -> Node -> Effect Unit
 
 -- | Uses the first node as a replacement for the second node in the children
 -- | of the third node.
-foreign import replaceChild :: Node -> Node -> Node -> Effect Node
+foreign import replaceChild :: Node -> Node -> Node -> Effect Unit
 
 -- | Removes the first node from the children of the second node.
-foreign import removeChild :: Node -> Node -> Effect Node
+foreign import removeChild :: Node -> Node -> Effect Unit
