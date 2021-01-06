@@ -36,6 +36,8 @@ module Web.DOM.Element
   , clientLeft
   , clientWidth
   , clientHeight
+  , ShadowRootInit
+  , attachShadow
   ) where
 
 import Prelude
@@ -50,6 +52,7 @@ import Web.DOM.Internal.Types (Element) as Exports
 import Web.DOM.Internal.Types (Element, HTMLCollection, Node)
 import Web.DOM.NonDocumentTypeChildNode (NonDocumentTypeChildNode)
 import Web.DOM.ParentNode (ParentNode)
+import Web.DOM.ShadowRoot (ShadowRoot, ShadowRootMode)
 import Web.Event.EventTarget (EventTarget)
 import Web.Internal.FFI (unsafeReadProtoTagged)
 
@@ -130,3 +133,24 @@ foreign import clientTop :: Element -> Effect Number
 foreign import clientLeft :: Element -> Effect Number
 foreign import clientWidth :: Element -> Effect Number
 foreign import clientHeight :: Element -> Effect Number
+
+type ShadowRootInit = {
+  mode :: ShadowRootMode,
+  delegatesFocus :: Boolean
+}
+
+type ShadowRootProps = {
+  mode :: String,
+  delegatesFocus :: Boolean
+}
+
+attachShadow :: ShadowRootInit -> Element -> Effect ShadowRoot
+attachShadow = _attachShadow <<< initToProps
+
+initToProps :: ShadowRootInit -> ShadowRootProps
+initToProps init = {
+  mode: show init.mode,
+  delegatesFocus: init.delegatesFocus
+}
+
+foreign import _attachShadow :: ShadowRootProps -> Element -> Effect ShadowRoot
