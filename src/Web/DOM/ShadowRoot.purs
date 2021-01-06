@@ -1,9 +1,9 @@
 module Web.DOM.ShadowRoot
   ( ShadowRoot
   , ShadowRootMode (..)
+  , toNode
   , host
   , mode
-  , toNode
   ) where
 
 import Prelude
@@ -14,6 +14,9 @@ import Web.DOM.Internal.Types (Element, Node)
 
 foreign import data ShadowRoot :: Type
 
+toNode :: ShadowRoot -> Node
+toNode = unsafeCoerce
+
 data ShadowRootMode = Open | Closed
 
 instance showShadowRootMode :: Show ShadowRootMode where
@@ -22,16 +25,11 @@ instance showShadowRootMode :: Show ShadowRootMode where
 
 mode :: ShadowRoot -> Maybe ShadowRootMode
 mode = modeFromString <<< _mode
+  where
+    modeFromString = case _ of
+      "open" -> Just Open
+      "closed" -> Just Closed
+      _ -> Nothing
 
 foreign import host :: ShadowRoot -> Effect Element
-
-toNode :: ShadowRoot -> Node
-toNode = unsafeCoerce
-
 foreign import _mode :: ShadowRoot -> String
-
-modeFromString :: String -> Maybe ShadowRootMode
-modeFromString m = case m of
-  "open" -> Just Open
-  "closed" -> Just Closed
-  _ -> Nothing

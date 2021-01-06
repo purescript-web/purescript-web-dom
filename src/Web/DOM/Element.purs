@@ -139,13 +139,13 @@ type ShadowRootInit = {
   delegatesFocus :: Boolean
 }
 
+attachShadow :: ShadowRootInit -> Element -> Effect ShadowRoot
+attachShadow = _attachShadow <<< initToProps
+
 type ShadowRootProps = {
   mode :: String,
   delegatesFocus :: Boolean
 }
-
-attachShadow :: ShadowRootInit -> Element -> Effect ShadowRoot
-attachShadow = _attachShadow <<< initToProps
 
 initToProps :: ShadowRootInit -> ShadowRootProps
 initToProps init = {
