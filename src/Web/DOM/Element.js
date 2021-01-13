@@ -170,3 +170,11 @@ exports.clientHeight = function (el) {
     return el.clientHeight;
   };
 };
+
+exports._attachShadow = function(props) {
+  return function (el) {
+    return function() {
+      return el.attachShadow(props);
+    };
+  };
+};
