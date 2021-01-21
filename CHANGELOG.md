@@ -10,6 +10,7 @@ Breaking changes:
 
 New features:
 - Add support for ShadowRoot API (#34)
+- Add support for `Element.matches` and `Element.closest` (#39)
 
 Bugfixes:
 
