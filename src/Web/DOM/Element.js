@@ -105,6 +105,22 @@ exports.removeAttribute = function (name) {
   };
 };
 
+exports.matches = function (selector) {
+  return function(element) {
+    return function () {
+      return element.matches(selector);
+    };
+  };
+};
+
+exports._closest = function (selector) {
+  return function(element) {
+    return function () {
+      return element.closest(selector);
+    };
+  };
+};
+
 // - CSSOM ---------------------------------------------------------------------
 
 exports.scrollTop = function (node) {

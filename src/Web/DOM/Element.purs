@@ -26,6 +26,8 @@ module Web.DOM.Element
   , getAttribute
   , hasAttribute
   , removeAttribute
+  , matches
+  , closest
   , scrollTop
   , setScrollTop
   , scrollLeft
@@ -51,7 +53,8 @@ import Web.DOM.DOMTokenList (DOMTokenList)
 import Web.DOM.Internal.Types (Element) as Exports
 import Web.DOM.Internal.Types (Element, HTMLCollection, Node)
 import Web.DOM.NonDocumentTypeChildNode (NonDocumentTypeChildNode)
-import Web.DOM.ParentNode (ParentNode)
+import Web.DOM.ParentNode (QuerySelector) as Exports
+import Web.DOM.ParentNode (ParentNode, QuerySelector)
 import Web.DOM.ShadowRoot (ShadowRoot, ShadowRootMode)
 import Web.Event.EventTarget (EventTarget)
 import Web.Internal.FFI (unsafeReadProtoTagged)
@@ -120,6 +123,13 @@ getAttribute attr = map toMaybe <<< _getAttribute attr
 foreign import _getAttribute :: String -> Element -> Effect (Nullable String)
 foreign import hasAttribute :: String -> Element -> Effect Boolean
 foreign import removeAttribute :: String -> Element -> Effect Unit
+
+foreign import matches :: QuerySelector -> Element -> Effect Boolean
+
+closest :: QuerySelector -> Element -> Effect (Maybe Element)
+closest qs = map toMaybe <<< _closest qs
+
+foreign import _closest :: QuerySelector -> Element -> Effect (Nullable Element)
 
 foreign import scrollTop :: Element -> Effect Number
 foreign import setScrollTop :: Number -> Element -> Effect Unit
