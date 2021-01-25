@@ -3,9 +3,22 @@
 -- |
 -- | The DOM API doesn't actually give you any way of getting hold of a
 -- | `Document` by itself. To do that, you will need to look at one of the
--- | other APIs which build on the DOM API. For example, `window.document` is
+-- | other APIs which build on the DOM API. 
+-- |
+-- | For example, `window.document` is
 -- | part of the HTML5 API, and so the relevant binding can be found in
 -- | `Web.HTML.Window`, which is part of the `purescript-web-html` package.
+-- | So here is one way to acquire an HTML5 `Document` from functions 
+-- | in `purescript-web-html`:
+-- |
+-- | ```purescript
+-- | import Web.HTML (window)
+-- | import Web.HTML.Window (document)
+-- | import Web.HTML.HTMLDocument (toDocument)
+-- |
+-- | do
+-- |     doc <- toDocument <$> document =<< window
+-- | ```
 module Web.DOM.Document
   ( Document
   , fromNode
