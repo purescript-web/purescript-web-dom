@@ -17,7 +17,7 @@
 -- | import Web.HTML.HTMLDocument (toDocument)
 -- |
 -- | do
--- |     doc <- toDocument <$> document =<< window
+-- |     doc <- map toDocument $ document =<< window
 -- | ```
 module Web.DOM.Document
   ( Document
