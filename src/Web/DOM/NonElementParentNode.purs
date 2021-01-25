@@ -16,9 +16,10 @@ foreign import data NonElementParentNode :: Type
 -- | no such element exists.
 foreign import _getElementById :: String -> NonElementParentNode -> Effect (Nullable Element)
 
--- | Get a DOM elemement by its id.
+-- | The first element within a node’s descendants with a matching ID, or `null` if
+-- | no such element exists.
 -- |
--- | This example shows how to call `getElementById` to get the "root" element
+-- | This example shows how to call `getElementById` to get the `"root"` element
 -- | of an HTML5 DOM.
 -- |
 -- | ```purescript
