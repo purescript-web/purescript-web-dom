@@ -4,7 +4,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/purescript-web/purescript-web-dom.git"
+    "url": "https://github.com/purescript-web/purescript-web-dom.git"
   },
   "ignore": [
     "**/.*",
@@ -15,6 +15,6 @@
     "package.json"
   ],
   "dependencies": {
-    "purescript-web-events": "master"
+    "purescript-web-events": "^3.0.0"
   }
 }
