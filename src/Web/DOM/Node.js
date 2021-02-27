@@ -86,6 +86,14 @@ exports.isEqualNode = function (node1) {
   };
 };
 
+exports.isSameNode = function (node1) {
+  return function (node2) {
+    return function () {
+      return node1.isSameNode(node2);
+    };
+  };
+};
+
 exports.compareDocumentPositionBits = function (node1) {
   return function (node2) {
     return function () {
