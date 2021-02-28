@@ -156,7 +156,7 @@ foreign import deepClone :: Node -> Effect Node
 foreign import isEqualNode :: Node -> Node -> Effect Boolean
 
 -- | Checks whether two nodes are the same.
-foreign import isSameNode :: Node -> Node -> Effect Boolean
+foreign import isSameNode :: Node -> Node -> Boolean
 
 -- TODO: compareDocumentPosition that returns a semigroup or something instead of the bitmask value
 
