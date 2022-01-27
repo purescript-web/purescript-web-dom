@@ -1,9 +1,9 @@
 "use strict";
 
 var getEffProp = function (name) {
-  return function (node) {
+  return function (attr) {
     return function () {
-      return node[name];
+      return attr[name];
     };
   };
 };
@@ -16,10 +16,14 @@ exports.localName = getEffProp("localName");
 
 exports.name = getEffProp("name");
 
-exports.getValue = getEffProp("getValue");
+exports.getValue = function (attr) {
+  return function () {
+    return attr.value;
+  };
+};
 
-exports.setValue = function (value) {
-  return function (attr) {
+exports.setValue = function (attr) {
+  return function (value) {
     return function () {
       attr.value = value;
     };
