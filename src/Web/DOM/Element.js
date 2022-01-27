@@ -71,6 +71,15 @@ exports.getElementsByClassName = function (classNames) {
   };
 };
 
+var getEffProp = function (name) {
+  return function (element) {
+    return function () {
+      return element[name];
+    };
+  };
+};
+exports.attributes = getEffProp("attributes");
+
 exports.setAttribute = function (name) {
   return function (value) {
     return function (element) {
