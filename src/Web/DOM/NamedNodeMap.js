@@ -2,7 +2,14 @@
 
 exports.getAttributes = function (namedNodeMap) {
   return function () {
-    return Array.prototype.slice.call(namedNodeMap.attributes);
+    var attributes = [];
+    var attributes_length = namedNodeMap.length;
+
+    for (var i = 0; i < attributes_length; i++) {
+      attributes.push(namedNodeMap.item(i));
+    }
+
+    return attributes;
   };
 };
 
