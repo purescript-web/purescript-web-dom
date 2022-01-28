@@ -9,9 +9,9 @@ module Web.DOM.Attr
   , ownerElement
   ) where
 
-import Prelude
+import Prelude (Unit, map, (<<<))
 
-import Data.Maybe
+import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toMaybe)
 import Effect (Effect)
 import Web.DOM.Internal.Types (Attr) as Exports
