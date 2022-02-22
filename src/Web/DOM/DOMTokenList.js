@@ -1,38 +1,38 @@
 "use strict";
 
-exports.add = function(list) {
+export function add(list) {
   return function(token) {
     return function() {
       return list.add(token);
     };
   };
-};
+}
 
-exports.remove = function(list) {
+export function remove(list) {
   return function(token) {
     return function() {
       return list.remove(token);
     };
   };
-};
+}
 
-exports.contains = function(list) {
+export function contains(list) {
   return function(token) {
     return function() {
       return list.contains(token);
     };
   };
-};
+}
 
-exports.toggle = function(list) {
+export function toggle(list) {
   return function(token) {
     return function() {
       return list.toggle(token);
     };
   };
-};
+}
 
-exports.toggleForce = function(list) {
+export function toggleForce(list) {
   return function(token) {
     return function(force) {
       return function() {
@@ -40,12 +40,12 @@ exports.toggleForce = function(list) {
       };
     };
   };
-};
+}
 
-exports._item = function(list) {
+export function _item(list) {
   return function(index) {
     return function() {
       return list.item(index);
     };
   };
-};
+}

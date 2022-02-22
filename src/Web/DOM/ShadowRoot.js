@@ -1,11 +1,11 @@
 "use strict";
 
-exports._mode = function (el) {
+export function _mode(el) {
   return el.mode;
-};
+}
 
-exports.host = function (el) {
+export function host(el) {
   return function() {
     return el.host;
   };
-};
+}

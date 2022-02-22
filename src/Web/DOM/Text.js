@@ -1,15 +1,15 @@
 "use strict";
 
-exports.splitText = function (offset) {
+export function splitText(offset) {
   return function (t) {
     return function () {
       return t.splitText(offset);
     };
   };
-};
+}
 
-exports.wholeText = function (t) {
+export function wholeText(t) {
   return function () {
     return t.wholeText;
   };
-};
+}

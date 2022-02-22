@@ -8,125 +8,117 @@ var getEffProp = function (name) {
   };
 };
 
-exports.nodeTypeIndex = function (node) {
+export function nodeTypeIndex(node) {
   return node.nodeType;
-};
+}
 
-exports.nodeName = function (node) {
+export function nodeName(node) {
   return node.nodeName;
-};
+}
 
-exports.baseURI = getEffProp("baseURI");
+export const baseURI = getEffProp("baseURI");
+export const _ownerDocument = getEffProp("ownerDocument");
+export const _parentNode = getEffProp("parentNode");
+export const _parentElement = getEffProp("parentElement");
 
-exports._ownerDocument = getEffProp("ownerDocument");
-
-exports._parentNode = getEffProp("parentNode");
-
-exports._parentElement = getEffProp("parentElement");
-
-exports.hasChildNodes = function (node) {
+export function hasChildNodes(node) {
   return function () {
     return node.hasChildNodes();
   };
-};
+}
 
-exports.childNodes = getEffProp("childNodes");
+export const childNodes = getEffProp("childNodes");
+export const _firstChild = getEffProp("firstChild");
+export const _lastChild = getEffProp("lastChild");
+export const _previousSibling = getEffProp("previousSibling");
+export const _nextSibling = getEffProp("nextSibling");
+export const _nodeValue = getEffProp("nodeValue");
 
-exports._firstChild = getEffProp("firstChild");
-
-exports._lastChild = getEffProp("lastChild");
-
-exports._previousSibling = getEffProp("previousSibling");
-
-exports._nextSibling = getEffProp("nextSibling");
-
-exports._nodeValue = getEffProp("nodeValue");
-
-exports.setNodeValue = function (value) {
+export function setNodeValue(value) {
   return function (node) {
     return function () {
       node.nodeValue = value;
     };
   };
-};
+}
 
-exports.textContent = getEffProp("textContent");
+export const textContent = getEffProp("textContent");
 
-exports.setTextContent = function (value) {
+export function setTextContent(value) {
   return function (node) {
     return function () {
       node.textContent = value;
     };
   };
-};
+}
 
-exports.normalize = function (node) {
+export function normalize(node) {
   return function () {
     node.normalize();
   };
-};
+}
 
-exports.clone = function (node) {
+export function clone(node) {
   return function () {
     return node.cloneNode(false);
   };
-};
+}
 
-exports.deepClone = function (node) {
+export function deepClone(node) {
   return function () {
     return node.cloneNode(true);
   };
-};
+}
 
-exports.isEqualNode = function (node1) {
+export function isEqualNode(node1) {
   return function (node2) {
     return function () {
       return node1.isEqualNode(node2);
     };
   };
-};
+}
 
-exports.compareDocumentPositionBits = function (node1) {
+export function compareDocumentPositionBits(node1) {
   return function (node2) {
     return function () {
       return node1.compareDocumentPosition(node2);
     };
   };
-};
+}
 
-exports.contains = function (node1) {
+export function contains(node1) {
   return function (node2) {
     return function () {
       return node1.contains(node2);
     };
   };
-};
+}
 
-exports._lookupPrefix = function (prefix) {
+export function _lookupPrefix(prefix) {
   return function (node) {
     return function () {
       return node.lookupPrefix(prefix);
     };
   };
-};
+}
 
-exports._lookupNamespaceURI = function (ns) {
+export function _lookupNamespaceURI(ns) {
   return function (node) {
     return function () {
       return node.lookupNamespaceURI(ns);
     };
   };
-};
+}
 
-exports.isDefaultNamespace = function (ns) {
+export function isDefaultNamespace(ns) {
   return function (node) {
     return function () {
       return node.isDefaultNamespace(ns);
     };
   };
-};
+}
 
-exports.insertBefore = function (node1) {
+export function insertBefore(node1) {
   return function (node2) {
     return function (parent) {
       return function () {
@@ -134,17 +126,17 @@ exports.insertBefore = function (node1) {
       };
     };
   };
-};
+}
 
-exports.appendChild = function (node) {
+export function appendChild(node) {
   return function (parent) {
     return function () {
       parent.appendChild(node);
     };
   };
-};
+}
 
-exports.replaceChild = function (newChild) {
+export function replaceChild(newChild) {
   return function (oldChild) {
     return function (parent) {
       return function () {
@@ -152,12 +144,12 @@ exports.replaceChild = function (newChild) {
       };
     };
   };
-};
+}
 
-exports.removeChild = function (node) {
+export function removeChild(node) {
   return function (parent) {
     return function () {
       parent.removeChild(node);
     };
   };
-};
+}

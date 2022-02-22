@@ -6,6 +6,6 @@ var getProp = function (name) {
   };
 };
 
-exports.name = getProp("name");
-exports.publicId = getProp("publicId");
-exports.systemId = getProp("systemId");
+export const name = getProp("name");
+export const publicId = getProp("publicId");
+export const systemId = getProp("systemId");
