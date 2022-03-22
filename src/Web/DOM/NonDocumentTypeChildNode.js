@@ -1,13 +1,11 @@
-"use strict";
-
-exports._previousElementSibling = function (node) {
+export function _previousElementSibling(node) {
   return function () {
     return node.previousElementSibling;
   };
-};
+}
 
-exports._nextElementSibling = function (node) {
+export function _nextElementSibling(node) {
   return function () {
     return node.nextElementSibling;
   };
-};
+}

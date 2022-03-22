@@ -1,55 +1,53 @@
-"use strict";
-
-exports.typeString = function (mr) {
+export function typeString(mr) {
   return function () {
     return mr.type;
   };
-};
+}
 
-exports.target = function (mr) {
+export function target(mr) {
   return function () {
     return mr.target;
   };
-};
+}
 
-exports.addedNodes = function (mr) {
+export function addedNodes(mr) {
   return function () {
     return mr.addedNodes;
   };
-};
+}
 
-exports.removedNodes = function (mr) {
+export function removedNodes(mr) {
   return function () {
     return mr.removedNodes;
   };
-};
+}
 
-exports._nextSibling = function (mr) {
+export function _nextSibling(mr) {
   return function () {
     return mr.nextSibling;
   };
-};
+}
 
-exports._previousSibling = function (mr) {
+export function _previousSibling(mr) {
   return function () {
     return mr.previousSibling;
   };
-};
+}
 
-exports._attributeName = function (mr) {
+export function _attributeName(mr) {
   return function () {
     return mr.attributeName;
   };
-};
+}
 
-exports._attributeNamespace = function (mr) {
+export function _attributeNamespace(mr) {
   return function () {
     return mr.attributeNamespace;
   };
-};
+}
 
-exports._oldValue = function (mr) {
+export function _oldValue(mr) {
   return function () {
     return mr.oldValue;
   };
-};
+}

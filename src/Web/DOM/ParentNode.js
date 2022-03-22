@@ -1,5 +1,3 @@
-"use strict";
-
 var getEffProp = function (name) {
   return function (node) {
     return function () {
@@ -8,26 +6,23 @@ var getEffProp = function (name) {
   };
 };
 
-exports.children = getEffProp("children");
+export const children = getEffProp("children");
+export const _firstElementChild = getEffProp("firstElementChild");
+export const _lastElementChild = getEffProp("lastElementChild");
+export const childElementCount = getEffProp("childElementCount");
 
-exports._firstElementChild = getEffProp("firstElementChild");
-
-exports._lastElementChild = getEffProp("lastElementChild");
-
-exports.childElementCount = getEffProp("childElementCount");
-
-exports._querySelector = function (selector) {
+export function _querySelector(selector) {
   return function (node) {
     return function () {
       return node.querySelector(selector);
     };
   };
-};
+}
 
-exports.querySelectorAll = function (selector) {
+export function querySelectorAll(selector) {
   return function (node) {
     return function () {
       return node.querySelectorAll(selector);
     };
   };
-};
+}

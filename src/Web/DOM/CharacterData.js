@@ -1,18 +1,16 @@
-"use strict";
-
-exports.data_ = function (t) {
+export function data_(t) {
   return function () {
     return t.data;
   };
-};
+}
 
-exports.length = function (t) {
+export function length(t) {
   return function () {
     return t.length;
   };
-};
+}
 
-exports.substringData = function (offset) {
+export function substringData(offset) {
   return function (count) {
     return function (cd) {
       return function () {
@@ -20,17 +18,17 @@ exports.substringData = function (offset) {
       };
     };
   };
-};
+}
 
-exports.appendData = function (data) {
+export function appendData(data) {
   return function (cd) {
     return function () {
       cd.appendData(data);
     };
   };
-};
+}
 
-exports.insertData = function (offset) {
+export function insertData(offset) {
   return function (data) {
     return function (cd) {
       return function () {
@@ -38,9 +36,9 @@ exports.insertData = function (offset) {
       };
     };
   };
-};
+}
 
-exports.deleteData = function (offset) {
+export function deleteData(offset) {
   return function (count) {
     return function (cd) {
       return function () {
@@ -48,9 +46,9 @@ exports.deleteData = function (offset) {
       };
     };
   };
-};
+}
 
-exports.replaceData = function (offset) {
+export function replaceData(offset) {
   return function (count) {
     return function (data) {
       return function (cd) {
@@ -60,4 +58,4 @@ exports.replaceData = function (offset) {
       };
     };
   };
-};
+}
