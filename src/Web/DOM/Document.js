@@ -8,14 +8,14 @@ var getEffProp = function (name) {
   };
 };
 
-export var url = getEffProp("URL");
-export var documentURI = getEffProp("documentURI");
-export var origin = getEffProp("origin");
-export var compatMode = getEffProp("compatMode");
-export var characterSet = getEffProp("characterSet");
-export var contentType = getEffProp("contentType");
-export var _doctype = getEffProp("doctype");
-export var _documentElement = getEffProp("documentElement");
+export const url = getEffProp("URL");
+export const documentURI = getEffProp("documentURI");
+export const origin = getEffProp("origin");
+export const compatMode = getEffProp("compatMode");
+export const characterSet = getEffProp("characterSet");
+export const contentType = getEffProp("contentType");
+export const _doctype = getEffProp("doctype");
+export const _documentElement = getEffProp("documentElement");
 
 export function getElementsByTagName(localName) {
   return function (doc) {

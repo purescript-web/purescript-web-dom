@@ -8,10 +8,10 @@ var getEffProp = function (name) {
   };
 };
 
-export var children = getEffProp("children");
-export var _firstElementChild = getEffProp("firstElementChild");
-export var _lastElementChild = getEffProp("lastElementChild");
-export var childElementCount = getEffProp("childElementCount");
+export const children = getEffProp("children");
+export const _firstElementChild = getEffProp("firstElementChild");
+export const _lastElementChild = getEffProp("lastElementChild");
+export const childElementCount = getEffProp("childElementCount");
 
 export function _querySelector(selector) {
   return function (node) {

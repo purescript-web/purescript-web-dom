@@ -16,10 +16,10 @@ export function nodeName(node) {
   return node.nodeName;
 }
 
-export var baseURI = getEffProp("baseURI");
-export var _ownerDocument = getEffProp("ownerDocument");
-export var _parentNode = getEffProp("parentNode");
-export var _parentElement = getEffProp("parentElement");
+export const baseURI = getEffProp("baseURI");
+export const _ownerDocument = getEffProp("ownerDocument");
+export const _parentNode = getEffProp("parentNode");
+export const _parentElement = getEffProp("parentElement");
 
 export function hasChildNodes(node) {
   return function () {
@@ -27,12 +27,12 @@ export function hasChildNodes(node) {
   };
 }
 
-export var childNodes = getEffProp("childNodes");
-export var _firstChild = getEffProp("firstChild");
-export var _lastChild = getEffProp("lastChild");
-export var _previousSibling = getEffProp("previousSibling");
-export var _nextSibling = getEffProp("nextSibling");
-export var _nodeValue = getEffProp("nodeValue");
+export const childNodes = getEffProp("childNodes");
+export const _firstChild = getEffProp("firstChild");
+export const _lastChild = getEffProp("lastChild");
+export const _previousSibling = getEffProp("previousSibling");
+export const _nextSibling = getEffProp("nextSibling");
+export const _nodeValue = getEffProp("nodeValue");
 
 export function setNodeValue(value) {
   return function (node) {
@@ -42,7 +42,7 @@ export function setNodeValue(value) {
   };
 }
 
-export var textContent = getEffProp("textContent");
+export const textContent = getEffProp("textContent");
 
 export function setTextContent(value) {
   return function (node) {

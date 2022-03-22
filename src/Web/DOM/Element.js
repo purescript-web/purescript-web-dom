@@ -6,10 +6,10 @@ var getProp = function (name) {
   };
 };
 
-export var _namespaceURI = getProp("namespaceURI");
-export var _prefix = getProp("prefix");
-export var localName = getProp("localName");
-export var tagName = getProp("tagName");
+export const _namespaceURI = getProp("namespaceURI");
+export const _prefix = getProp("prefix");
+export const localName = getProp("localName");
+export const tagName = getProp("tagName");
 
 export function id(node) {
   return function () {
