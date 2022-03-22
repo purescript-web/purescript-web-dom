@@ -1,5 +1,3 @@
-"use strict";
-
 export function splitText(offset) {
   return function (t) {
     return function () {

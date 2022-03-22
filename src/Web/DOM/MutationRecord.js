@@ -1,5 +1,3 @@
-"use strict";
-
 export function typeString(mr) {
   return function () {
     return mr.type;

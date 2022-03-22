@@ -1,5 +1,3 @@
-"use strict";
-
 export function mutationObserver(cb) {
   return function () {
     return new MutationObserver(function (mr, mo) {

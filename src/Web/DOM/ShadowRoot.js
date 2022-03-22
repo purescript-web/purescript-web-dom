@@ -1,5 +1,3 @@
-"use strict";
-
 export function _mode(el) {
   return el.mode;
 }

@@ -1,5 +1,3 @@
-"use strict";
-
 export function data_(t) {
   return function () {
     return t.data;

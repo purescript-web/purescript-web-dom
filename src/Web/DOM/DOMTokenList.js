@@ -1,5 +1,3 @@
-"use strict";
-
 export function add(list) {
   return function(token) {
     return function() {

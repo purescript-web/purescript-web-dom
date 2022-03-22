@@ -1,5 +1,3 @@
-"use strict";
-
 var getProp = function (name) {
   return function (doctype) {
     return doctype[name];

@@ -1,5 +1,3 @@
-"use strict";
-
 var getEffProp = function (name) {
   return function (doc) {
     return function () {

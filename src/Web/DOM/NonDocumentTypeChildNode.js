@@ -1,5 +1,3 @@
-"use strict";
-
 export function _previousElementSibling(node) {
   return function () {
     return node.previousElementSibling;
