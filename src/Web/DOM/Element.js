@@ -6,54 +6,54 @@ var getProp = function (name) {
   };
 };
 
-exports._namespaceURI = getProp("namespaceURI");
-exports._prefix = getProp("prefix");
-exports.localName = getProp("localName");
-exports.tagName = getProp("tagName");
+export var _namespaceURI = getProp("namespaceURI");
+export var _prefix = getProp("prefix");
+export var localName = getProp("localName");
+export var tagName = getProp("tagName");
 
-exports.id = function (node) {
+export function id(node) {
   return function () {
     return node.id;
   };
-};
+}
 
-exports.setId = function (id) {
+export function setId(id) {
   return function (node) {
     return function () {
       node.id = id;
     };
   };
-};
+}
 
-exports.className = function (node) {
+export function className(node) {
   return function () {
     return node.className;
   };
-};
+}
 
-exports.classList = function (element) {
+export function classList(element) {
   return function () {
     return element.classList;
   };
-};
+}
 
-exports.setClassName = function (className) {
+export function setClassName(className) {
   return function (node) {
     return function () {
       node.className = className;
     };
   };
-};
+}
 
-exports.getElementsByTagName = function (localName) {
+export function getElementsByTagName(localName) {
   return function (doc) {
     return function () {
       return doc.getElementsByTagName(localName);
     };
   };
-};
+}
 
-exports._getElementsByTagNameNS = function (ns) {
+export function _getElementsByTagNameNS(ns) {
   return function (localName) {
     return function (doc) {
       return function () {
@@ -61,17 +61,17 @@ exports._getElementsByTagNameNS = function (ns) {
       };
     };
   };
-};
+}
 
-exports.getElementsByClassName = function (classNames) {
+export function getElementsByClassName(classNames) {
   return function (doc) {
     return function () {
       return doc.getElementsByClassName(classNames);
     };
   };
-};
+}
 
-exports.setAttribute = function (name) {
+export function setAttribute(name) {
   return function (value) {
     return function (element) {
       return function () {
@@ -79,118 +79,118 @@ exports.setAttribute = function (name) {
       };
     };
   };
-};
+}
 
-exports._getAttribute = function (name) {
+export function _getAttribute(name) {
   return function (element) {
     return function () {
       return element.getAttribute(name);
     };
   };
-};
+}
 
-exports.hasAttribute = function(name) {
+export function hasAttribute(name) {
   return function (element) {
     return function () {
       return element.hasAttribute(name);
     };
   };
-};
+}
 
-exports.removeAttribute = function (name) {
+export function removeAttribute(name) {
   return function (element) {
     return function () {
       element.removeAttribute(name);
     };
   };
-};
+}
 
-exports.matches = function (selector) {
+export function matches(selector) {
   return function(element) {
     return function () {
       return element.matches(selector);
     };
   };
-};
+}
 
-exports._closest = function (selector) {
+export function _closest(selector) {
   return function(element) {
     return function () {
       return element.closest(selector);
     };
   };
-};
+}
 
 // - CSSOM ---------------------------------------------------------------------
 
-exports.scrollTop = function (node) {
+export function scrollTop(node) {
   return function () {
     return node.scrollTop;
   };
-};
+}
 
-exports.setScrollTop = function (scrollTop) {
+export function setScrollTop(scrollTop) {
   return function (node) {
     return function () {
       node.scrollTop = scrollTop;
     };
   };
-};
+}
 
-exports.scrollLeft = function (node) {
+export function scrollLeft(node) {
   return function () {
     return node.scrollLeft;
   };
-};
+}
 
-exports.setScrollLeft = function (scrollLeft) {
+export function setScrollLeft(scrollLeft) {
   return function (node) {
     return function () {
       node.scrollLeft = scrollLeft;
     };
   };
-};
+}
 
-exports.scrollWidth = function (el) {
+export function scrollWidth(el) {
   return function () {
     return el.scrollWidth;
   };
-};
+}
 
-exports.scrollHeight = function (el) {
+export function scrollHeight(el) {
   return function () {
     return el.scrollHeight;
   };
-};
+}
 
-exports.clientTop = function (el) {
+export function clientTop(el) {
   return function () {
     return el.clientTop;
   };
-};
+}
 
-exports.clientLeft = function (el) {
+export function clientLeft(el) {
   return function () {
     return el.clientLeft;
   };
-};
+}
 
-exports.clientWidth = function (el) {
+export function clientWidth(el) {
   return function () {
     return el.clientWidth;
   };
-};
+}
 
-exports.clientHeight = function (el) {
+export function clientHeight(el) {
   return function () {
     return el.clientHeight;
   };
-};
+}
 
-exports._attachShadow = function(props) {
+export function _attachShadow(props) {
   return function (el) {
     return function() {
       return el.attachShadow(props);
     };
   };
-};
+}
