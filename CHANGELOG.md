@@ -6,6 +6,7 @@ Notable changes to this project are documented in this file. The format is based
 
 Breaking changes:
 - Migrate FFI to ES modules (#51 by @JordanMartinez)
+- Unwrap returned `Effect` for `doctype` (#52 by @JordanMartinez)
 
 New features:
 
