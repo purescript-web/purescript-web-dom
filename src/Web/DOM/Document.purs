@@ -90,7 +90,7 @@ foreign import characterSet :: Document -> Effect String
 foreign import contentType :: Document -> Effect String
 
 doctype :: Document -> Maybe DocumentType
-doctype = map toMaybe <<< _doctype
+doctype = toMaybe <<< _doctype
 
 foreign import _doctype :: Document -> Nullable DocumentType
 
