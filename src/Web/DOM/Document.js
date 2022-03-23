@@ -12,7 +12,9 @@ export const origin = getEffProp("origin");
 export const compatMode = getEffProp("compatMode");
 export const characterSet = getEffProp("characterSet");
 export const contentType = getEffProp("contentType");
-export const _doctype = getEffProp("doctype");
+export function _doctype(doc) {
+  return doc["doctype"];
+}
 export const _documentElement = getEffProp("documentElement");
 
 export function getElementsByTagName(localName) {

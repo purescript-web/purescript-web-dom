@@ -89,10 +89,10 @@ foreign import compatMode :: Document -> Effect String
 foreign import characterSet :: Document -> Effect String
 foreign import contentType :: Document -> Effect String
 
-doctype :: Document -> Effect (Maybe DocumentType)
-doctype = map toMaybe <<< _doctype
+doctype :: Document -> Maybe DocumentType
+doctype = toMaybe <<< _doctype
 
-foreign import _doctype :: Document -> Effect (Nullable DocumentType)
+foreign import _doctype :: Document -> Nullable DocumentType
 
 documentElement :: Document -> Effect (Maybe Element)
 documentElement = map toMaybe <<< _documentElement
