@@ -185,6 +185,22 @@ export function clientHeight(el) {
   };
 }
 
+export function getBoundingClientRect(el) {
+  return function () {
+    var rect = el.getBoundingClientRect();
+    return {
+      top: rect.top,
+      right: rect.right,
+      bottom: rect.bottom,
+      left: rect.left,
+      width: rect.width,
+      height: rect.height,
+      x: rect.x,
+      y: rect.y
+    };
+  };
+}
+
 export function _attachShadow(props) {
   return function (el) {
     return function() {
