@@ -5,6 +5,16 @@ Notable changes to this project are documented in this file. The format is based
 ## [Unreleased]
 
 Breaking changes:
+
+New features:
+
+Bugfixes:
+
+Other improvements:
+
+## [v6.0.0](https://github.com/purescript-web/purescript-web-dom/releases/tag/v6.0.0) - 2022-04-27
+
+Breaking changes:
 - Migrate FFI to ES modules (#51 by @JordanMartinez)
 - Unwrap returned `Effect` for `doctype` (#52 by @JordanMartinez)
 - Port `getBoundingClientRect` from `web-html`; set arg to `Element` (#53 by @JordanMartinez)
