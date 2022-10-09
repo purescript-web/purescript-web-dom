@@ -6,13 +6,13 @@ var getEffProp = function (name) {
   };
 };
 
-export function namespaceURI = () => getEffProp("namespaceURI");
+export const namespaceURI = getEffProp("namespaceURI");
 
-export function prefix = () => getEffProp("prefix");
+export const prefix = getEffProp("prefix");
 
-export function localName = () => getEffProp("localName");
+export const localName = getEffProp("localName");
 
-export function name = () => getEffProp("name");
+export const name = getEffProp("name");
 
 export function getValue(attr) {
   return function () {
@@ -28,4 +28,4 @@ export function setValue (attr) {
   };
 };
 
-export function _ownerElement = () => getEffProp("_ownerElement");
+export const _ownerElement = getEffProp("_ownerElement");
