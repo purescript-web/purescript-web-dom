@@ -7,3 +7,9 @@ package-lock.json
 /node_modules/
 /output/
 /generated-docs/
+/.pulp-cache/
+/.psc-package/
+/.psc*
+/.purs*
+/.psa*
+/.spago

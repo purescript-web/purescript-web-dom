@@ -1,11 +1,16 @@
 module Web.DOM.DOMTokenList
   ( DOMTokenList
   , add
-  , contains
-  , item
   , remove
+  , contains
   , toggle
   , toggleForce
+  , tokens
+  , replace
+  , supports
+  , setValue
+  , getValue
+  , item
   ) where
 
 import Prelude
@@ -25,6 +30,16 @@ foreign import contains :: DOMTokenList -> String -> Effect Boolean
 foreign import toggle :: DOMTokenList -> String -> Effect Boolean
 
 foreign import toggleForce :: DOMTokenList -> String -> Boolean -> Effect Boolean
+
+foreign import tokens :: DOMTokenList -> Effect (Array String)
+
+foreign import replace :: DOMTokenList -> String -> String -> Effect Unit
+
+foreign import supports :: DOMTokenList -> String -> Effect Boolean
+
+foreign import setValue :: DOMTokenList -> String -> Effect Unit
+
+foreign import getValue :: DOMTokenList -> Effect String
 
 foreign import _item :: DOMTokenList -> Int -> Effect (Nullable String)
 

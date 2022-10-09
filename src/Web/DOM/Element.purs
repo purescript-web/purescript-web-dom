@@ -22,6 +22,7 @@ module Web.DOM.Element
   , getElementsByTagName
   , getElementsByTagNameNS
   , getElementsByClassName
+  , attributes
   , setAttribute
   , getAttribute
   , hasAttribute
@@ -53,7 +54,7 @@ import Unsafe.Coerce (unsafeCoerce)
 import Web.DOM.ChildNode (ChildNode)
 import Web.DOM.DOMTokenList (DOMTokenList)
 import Web.DOM.Internal.Types (Element) as Exports
-import Web.DOM.Internal.Types (Element, HTMLCollection, Node)
+import Web.DOM.Internal.Types (Element, HTMLCollection, Node, NamedNodeMap)
 import Web.DOM.NonDocumentTypeChildNode (NonDocumentTypeChildNode)
 import Web.DOM.ParentNode (QuerySelector) as Exports
 import Web.DOM.ParentNode (ParentNode, QuerySelector)
@@ -116,6 +117,8 @@ getElementsByTagNameNS = _getElementsByTagNameNS <<< toNullable
 foreign import _getElementsByTagNameNS :: Nullable String -> String -> Element -> Effect HTMLCollection
 
 foreign import getElementsByClassName :: String -> Element -> Effect HTMLCollection
+
+foreign import attributes :: Element -> Effect NamedNodeMap
 
 foreign import setAttribute :: String -> String -> Element -> Effect Unit
 
