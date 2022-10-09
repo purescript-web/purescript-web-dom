@@ -48,7 +48,7 @@ export function _item(list) {
   };
 }
 
-exports function replace(list) {
+export function replace(list) {
   return function(token) {
     return function(newToken) {
       return function() {
@@ -58,7 +58,7 @@ exports function replace(list) {
   };
 };
 
-exports function supports(list) {
+export function supports(list) {
   return function(token) {
     return function() {
       return list.supports(token);
@@ -66,7 +66,7 @@ exports function supports(list) {
   };
 };
 
-exports function tokens(domTokenList) {
+export function tokens(domTokenList) {
   return function () {
     var tokens = [];
     var tokens_length = domTokenList.length;
@@ -79,7 +79,7 @@ exports function tokens(domTokenList) {
   };
 };
 
-exports function setValue(list) {
+export function setValue(list) {
   return function(token) {
     return function() {
       return list.setValue(token);
@@ -87,7 +87,7 @@ exports function setValue(list) {
   };
 };
 
-exports function getValue(list) {
+export function getValue(list) {
   return function() {
     return list.getValue();
   };

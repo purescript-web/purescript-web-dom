@@ -1,6 +1,4 @@
-"use strict";
-
-exports.getAttributes = function (namedNodeMap) {
+export function getAttributes(namedNodeMap) {
   return function () {
     var attributes = [];
     var attributes_length = namedNodeMap.length;
@@ -13,7 +11,7 @@ exports.getAttributes = function (namedNodeMap) {
   };
 };
 
-exports.getNamedItem = function (namedNodeMap) {
+export function getNamedItem(namedNodeMap) {
   return function (qualifiedName) {
     return function () {
       return namedNodeMap.getNamedItem(qualifiedName);
@@ -21,7 +19,7 @@ exports.getNamedItem = function (namedNodeMap) {
   };
 };
 
-exports.getNamedItemNS = function (namedNodeMap) {
+export function getNamedItemNS(namedNodeMap) {
   return function (qualifiedName) {
     return function () {
       return namedNodeMap.getNamedItemNS(qualifiedName);
@@ -29,7 +27,7 @@ exports.getNamedItemNS = function (namedNodeMap) {
   };
 };
 
-exports.setNamedItem = function (namedNodeMap) {
+export function setNamedItem(namedNodeMap) {
   return function (qualifiedName) {
     return function () {
       return namedNodeMap.setNamedItem(qualifiedName);
@@ -37,7 +35,7 @@ exports.setNamedItem = function (namedNodeMap) {
   };
 };
 
-exports.setNamedItemNS = function (namedNodeMap) {
+export function setNamedItemNS(namedNodeMap) {
   return function (qualifiedName) {
     return function () {
       return namedNodeMap.setNamedItemNS(qualifiedName);
@@ -45,7 +43,7 @@ exports.setNamedItemNS = function (namedNodeMap) {
   };
 };
 
-exports.removeNamedItem = function (namedNodeMap) {
+export function removeNamedItem(namedNodeMap) {
   return function (qualifiedName) {
     return function () {
       return namedNodeMap.removeNamedItem(qualifiedName);
@@ -53,7 +51,7 @@ exports.removeNamedItem = function (namedNodeMap) {
   };
 };
 
-exports.removeNamedItemNS = function (namedNodeMap) {
+export function removeNamedItemNS(namedNodeMap) {
   return function (qualifiedName) {
     return function () {
       return namedNodeMap.removeNamedItemNS(qualifiedName);

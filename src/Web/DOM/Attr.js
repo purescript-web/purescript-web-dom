@@ -1,5 +1,3 @@
-"use strict";
-
 var getEffProp = function (name) {
   return function (attr) {
     return function () {
@@ -8,21 +6,21 @@ var getEffProp = function (name) {
   };
 };
 
-exports.namespaceURI = getEffProp("namespaceURI");
+exports function namespaceURI = () => getEffProp("namespaceURI");
 
-exports.prefix = getEffProp("prefix");
+exports function prefix = () => getEffProp("prefix");
 
-exports.localName = getEffProp("localName");
+exports function localName = () => getEffProp("localName");
 
-exports.name = getEffProp("name");
+exports function name = () => getEffProp("name");
 
-exports.getValue = function (attr) {
+exports function getValue(attr) {
   return function () {
     return attr.value;
   };
 };
 
-exports.setValue = function (attr) {
+exports function setValue (attr) {
   return function (value) {
     return function () {
       attr.value = value;
@@ -30,4 +28,4 @@ exports.setValue = function (attr) {
   };
 };
 
-exports._ownerElement = getEffProp("_ownerElement");
+exports function _ownerElement = () => getEffProp("_ownerElement");

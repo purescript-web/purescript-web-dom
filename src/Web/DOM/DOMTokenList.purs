@@ -4,6 +4,7 @@ module Web.DOM.DOMTokenList
   , remove
   , contains
   , toggle
+  , toggleForce
   , tokens
   , replace
   , supports
@@ -27,6 +28,8 @@ foreign import remove :: DOMTokenList -> String -> Effect Unit
 foreign import contains :: DOMTokenList -> String -> Effect Boolean
 
 foreign import toggle :: DOMTokenList -> String -> Effect Boolean
+
+foreign import toggleForce :: DOMTokenList -> String -> Boolean -> Effect Boolean
 
 foreign import tokens :: DOMTokenList -> Effect (Array String)
 

@@ -76,7 +76,7 @@ var getEffProp = function (name) {
     };
   };
 };
-exports attributes = getEffProp("attributes");
+export attributes = getEffProp("attributes");
 
 export function setAttribute(name) {
   return function (value) {
