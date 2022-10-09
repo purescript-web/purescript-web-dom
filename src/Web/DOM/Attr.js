@@ -6,21 +6,21 @@ var getEffProp = function (name) {
   };
 };
 
-exports function namespaceURI = () => getEffProp("namespaceURI");
+export function namespaceURI = () => getEffProp("namespaceURI");
 
-exports function prefix = () => getEffProp("prefix");
+export function prefix = () => getEffProp("prefix");
 
-exports function localName = () => getEffProp("localName");
+export function localName = () => getEffProp("localName");
 
-exports function name = () => getEffProp("name");
+export function name = () => getEffProp("name");
 
-exports function getValue(attr) {
+export function getValue(attr) {
   return function () {
     return attr.value;
   };
 };
 
-exports function setValue (attr) {
+export function setValue (attr) {
   return function (value) {
     return function () {
       attr.value = value;
@@ -28,4 +28,4 @@ exports function setValue (attr) {
   };
 };
 
-exports function _ownerElement = () => getEffProp("_ownerElement");
+export function _ownerElement = () => getEffProp("_ownerElement");
