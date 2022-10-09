@@ -1,46 +1,54 @@
-"use strict";
-
-exports.add = function(list) {
+export function add(list) {
   return function(token) {
     return function() {
       return list.add(token);
     };
   };
-};
+}
 
-exports.remove = function(list) {
+export function remove(list) {
   return function(token) {
     return function() {
       return list.remove(token);
     };
   };
-};
+}
 
-exports.contains = function(list) {
+export function contains(list) {
   return function(token) {
     return function() {
       return list.contains(token);
     };
   };
-};
+}
 
-exports.toggle = function(list) {
+export function toggle(list) {
   return function(token) {
     return function() {
       return list.toggle(token);
     };
   };
-};
+}
 
-exports._item = function(list) {
+export function toggleForce(list) {
+  return function(token) {
+    return function(force) {
+      return function() {
+        return list.toggle(token, force);
+      };
+    };
+  };
+}
+
+export function _item(list) {
   return function(index) {
     return function() {
       return list.item(index);
     };
   };
-};
+}
 
-exports.replace = function(list) {
+exports function replace(list) {
   return function(token) {
     return function(newToken) {
       return function() {
@@ -50,7 +58,7 @@ exports.replace = function(list) {
   };
 };
 
-exports.supports = function(list) {
+exports function supports(list) {
   return function(token) {
     return function() {
       return list.supports(token);
@@ -58,7 +66,7 @@ exports.supports = function(list) {
   };
 };
 
-exports.tokens = function (domTokenList) {
+exports function tokens(domTokenList) {
   return function () {
     var tokens = [];
     var tokens_length = domTokenList.length;
@@ -71,7 +79,7 @@ exports.tokens = function (domTokenList) {
   };
 };
 
-exports.setValue = function(list) {
+exports function setValue(list) {
   return function(token) {
     return function() {
       return list.setValue(token);
@@ -79,7 +87,7 @@ exports.setValue = function(list) {
   };
 };
 
-exports.getValue = function(list) {
+exports function getValue(list) {
   return function() {
     return list.getValue();
   };

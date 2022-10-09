@@ -1,9 +1,7 @@
-"use strict";
-
-exports._getElementById = function (id) {
+export function _getElementById(id) {
   return function (node) {
     return function () {
       return node.getElementById(id);
     };
   };
-};
+}

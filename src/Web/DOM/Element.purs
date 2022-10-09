@@ -39,6 +39,8 @@ module Web.DOM.Element
   , clientLeft
   , clientWidth
   , clientHeight
+  , getBoundingClientRect
+  , DOMRect
   , ShadowRootInit
   , attachShadow
   ) where
@@ -146,6 +148,19 @@ foreign import clientTop :: Element -> Effect Number
 foreign import clientLeft :: Element -> Effect Number
 foreign import clientWidth :: Element -> Effect Number
 foreign import clientHeight :: Element -> Effect Number
+
+type DOMRect =
+  { top :: Number
+  , right :: Number
+  , bottom :: Number
+  , left :: Number
+  , width :: Number
+  , height :: Number
+  , x :: Number
+  , y :: Number
+  }
+
+foreign import getBoundingClientRect :: Element -> Effect DOMRect
 
 type ShadowRootInit = {
   mode :: ShadowRootMode,

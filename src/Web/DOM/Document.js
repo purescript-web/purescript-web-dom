@@ -1,5 +1,3 @@
-"use strict";
-
 var getEffProp = function (name) {
   return function (doc) {
     return function () {
@@ -8,25 +6,26 @@ var getEffProp = function (name) {
   };
 };
 
-exports.url = getEffProp("URL");
-exports.documentURI = getEffProp("documentURI");
-exports.origin = getEffProp("origin");
-exports.compatMode = getEffProp("compatMode");
-exports.characterSet = getEffProp("characterSet");
-exports.contentType = getEffProp("contentType");
+export const url = getEffProp("URL");
+export const documentURI = getEffProp("documentURI");
+export const origin = getEffProp("origin");
+export const compatMode = getEffProp("compatMode");
+export const characterSet = getEffProp("characterSet");
+export const contentType = getEffProp("contentType");
+export function _doctype(doc) {
+  return doc["doctype"];
+}
+export const _documentElement = getEffProp("documentElement");
 
-exports._doctype = getEffProp("doctype");
-exports._documentElement = getEffProp("documentElement");
-
-exports.getElementsByTagName = function (localName) {
+export function getElementsByTagName(localName) {
   return function (doc) {
     return function () {
       return doc.getElementsByTagName(localName);
     };
   };
-};
+}
 
-exports._getElementsByTagNameNS = function (ns) {
+export function _getElementsByTagNameNS(ns) {
   return function (localName) {
     return function (doc) {
       return function () {
@@ -34,25 +33,25 @@ exports._getElementsByTagNameNS = function (ns) {
       };
     };
   };
-};
+}
 
-exports.getElementsByClassName = function (classNames) {
+export function getElementsByClassName(classNames) {
   return function (doc) {
     return function () {
       return doc.getElementsByClassName(classNames);
     };
   };
-};
+}
 
-exports.createElement = function (localName) {
+export function createElement(localName) {
   return function (doc) {
     return function () {
       return doc.createElement(localName);
     };
   };
-};
+}
 
-exports._createElementNS = function (ns) {
+export function _createElementNS(ns) {
   return function (qualifiedName) {
     return function (doc) {
       return function () {
@@ -60,31 +59,31 @@ exports._createElementNS = function (ns) {
       };
     };
   };
-};
+}
 
-exports.createDocumentFragment = function (doc) {
+export function createDocumentFragment(doc) {
   return function () {
     return doc.createDocumentFragment();
   };
-};
+}
 
-exports.createTextNode = function (data) {
+export function createTextNode(data) {
   return function (doc) {
     return function () {
       return doc.createTextNode(data);
     };
   };
-};
+}
 
-exports.createComment = function (data) {
+export function createComment(data) {
   return function (doc) {
     return function () {
       return doc.createComment(data);
     };
   };
-};
+}
 
-exports.createProcessingInstruction = function (target) {
+export function createProcessingInstruction(target) {
   return function (data) {
     return function (doc) {
       return function () {
@@ -92,9 +91,9 @@ exports.createProcessingInstruction = function (target) {
       };
     };
   };
-};
+}
 
-exports.importNode = function (node) {
+export function importNode(node) {
   return function (deep) {
     return function (doc) {
       return function () {
@@ -102,12 +101,12 @@ exports.importNode = function (node) {
       };
     };
   };
-};
+}
 
-exports.adoptNode = function (node) {
+export function adoptNode(node) {
   return function (doc) {
     return function () {
       return doc.adoptNode(node);
     };
   };
-};
+}
