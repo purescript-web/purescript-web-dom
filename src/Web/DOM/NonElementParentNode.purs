@@ -16,5 +16,21 @@ foreign import data NonElementParentNode :: Type
 -- | no such element exists.
 foreign import _getElementById :: String -> NonElementParentNode -> Effect (Nullable Element)
 
+-- | The first element within a node’s descendants with a matching ID, or `null` if
+-- | no such element exists.
+-- |
+-- | This example shows how to call `getElementById` to get the `"root"` element
+-- | of an HTML5 DOM.
+-- |
+-- | ```purescript
+-- | import Web.HTML (window)                  -- from purescript-web-html
+-- | import Web.HTML.Window (document)         -- from purescript-web-html
+-- | import Web.HTML.HTMLDocument (toDocument) -- from purescript-web-html
+-- | import Web.DOM.Document (toNonElementParentNode)
+-- |
+-- | do
+-- |     n <- map toNonElementParentNode $ map toDocument $ document =<< window
+-- |     e <- getElementById "root" n
+-- | ```
 getElementById :: String -> NonElementParentNode -> Effect (Maybe Element)
 getElementById eid = map toMaybe <<< _getElementById eid
