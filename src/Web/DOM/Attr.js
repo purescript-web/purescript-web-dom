@@ -18,7 +18,7 @@ export function getValue(attr) {
   return function () {
     return attr.value;
   };
-};
+}
 
 export function setValue (attr) {
   return function (value) {
@@ -26,6 +26,6 @@ export function setValue (attr) {
       attr.value = value;
     };
   };
-};
+}
 
 export const _ownerElement = getEffProp("_ownerElement");

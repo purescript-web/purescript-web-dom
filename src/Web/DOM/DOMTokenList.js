@@ -56,7 +56,7 @@ export function replace(list) {
       };
     };
   };
-};
+}
 
 export function supports(list) {
   return function(token) {
@@ -64,7 +64,7 @@ export function supports(list) {
       return list.supports(token);
     };
   };
-};
+}
 
 export function tokens(domTokenList) {
   return function () {
@@ -77,7 +77,7 @@ export function tokens(domTokenList) {
 
     return tokens;
   };
-};
+}
 
 export function setValue(list) {
   return function(token) {
@@ -85,10 +85,10 @@ export function setValue(list) {
       return list.setValue(token);
     };
   };
-};
+}
 
 export function getValue(list) {
   return function() {
     return list.getValue();
   };
-};
+}

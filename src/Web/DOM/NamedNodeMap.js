@@ -9,7 +9,7 @@ export function getAttributes(namedNodeMap) {
 
     return attributes;
   };
-};
+}
 
 export function getNamedItem(namedNodeMap) {
   return function (qualifiedName) {
@@ -17,7 +17,7 @@ export function getNamedItem(namedNodeMap) {
       return namedNodeMap.getNamedItem(qualifiedName);
     };
   };
-};
+}
 
 export function getNamedItemNS(namedNodeMap) {
   return function (qualifiedName) {
@@ -25,7 +25,7 @@ export function getNamedItemNS(namedNodeMap) {
       return namedNodeMap.getNamedItemNS(qualifiedName);
     };
   };
-};
+}
 
 export function setNamedItem(namedNodeMap) {
   return function (qualifiedName) {
@@ -33,7 +33,7 @@ export function setNamedItem(namedNodeMap) {
       return namedNodeMap.setNamedItem(qualifiedName);
     };
   };
-};
+}
 
 export function setNamedItemNS(namedNodeMap) {
   return function (qualifiedName) {
@@ -41,7 +41,7 @@ export function setNamedItemNS(namedNodeMap) {
       return namedNodeMap.setNamedItemNS(qualifiedName);
     };
   };
-};
+}
 
 export function removeNamedItem(namedNodeMap) {
   return function (qualifiedName) {
@@ -49,7 +49,7 @@ export function removeNamedItem(namedNodeMap) {
       return namedNodeMap.removeNamedItem(qualifiedName);
     };
   };
-};
+}
 
 export function removeNamedItemNS(namedNodeMap) {
   return function (qualifiedName) {
@@ -57,4 +57,4 @@ export function removeNamedItemNS(namedNodeMap) {
       return namedNodeMap.removeNamedItemNS(qualifiedName);
     };
   };
-};
+}
