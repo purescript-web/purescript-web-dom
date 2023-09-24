@@ -5,8 +5,16 @@ Notable changes to this project are documented in this file. The format is based
 ## [Unreleased]
 
 Breaking changes:
+- The `id` function returns an `ElementId` instead of a `String`. (#58 by @nsaunders)
+- The `setId` function is parameterized by `ElementId` instead of `String`. (#58 by @nsaunders)
+- The `getElementById` function is parameterized by `ElementId` instead of `String`. (#58 by @nsaunders)
+- The `className` function returns a `ClassName` instead of a `String`. (#58 by @nsaunders)
+- The `setClassName` and `getElementsByClassName` functions are parameterized by `ClassName` instead of `String`. (#58 by @nsaunders)
+- The `getAttribute`, `setAttribute`, `hasAttribute`, and `removeAttribute` functions are parameterized by `AttrName` instead of `String`. (#58 by @nsaunders)
 
 New features:
+- `AttrName`, `ClassName`, and `PropName` types have been added, migrated from [web-html](https://github.com/purescript-web/purescript-web-html). (#58 by @nsaunders)
+- A new `ElementId` type, representing the value of an `id` property/attribute, has been added. (#58 by @nsaunders)
 
 Bugfixes:
 
