@@ -43,26 +43,24 @@ module Web.DOM.Element
   , DOMRect
   , ShadowRootInit
   , attachShadow
-  , AttrName(..)
-  , ClassName(..)
-  , ElementId(..)
-  , PropName(..)
   ) where
 
 import Prelude
 
 import Data.Maybe (Maybe)
-import Data.Newtype (class Newtype)
 import Data.Nullable (Nullable, toMaybe, toNullable)
 import Effect (Effect)
 import Unsafe.Coerce (unsafeCoerce)
+import Web.DOM.AttrName (AttrName)
 import Web.DOM.ChildNode (ChildNode)
+import Web.DOM.ClassName (ClassName)
 import Web.DOM.DOMTokenList (DOMTokenList)
+import Web.DOM.ElementId (ElementId)
 import Web.DOM.Internal.Types (Element) as Exports
 import Web.DOM.Internal.Types (Element, HTMLCollection, Node, NamedNodeMap)
 import Web.DOM.NonDocumentTypeChildNode (NonDocumentTypeChildNode)
-import Web.DOM.ParentNode (QuerySelector) as Exports
 import Web.DOM.ParentNode (ParentNode, QuerySelector)
+import Web.DOM.ParentNode (QuerySelector) as Exports
 import Web.DOM.ShadowRoot (ShadowRoot, ShadowRootMode)
 import Web.Event.EventTarget (EventTarget)
 import Web.Internal.FFI (unsafeReadProtoTagged)
@@ -187,35 +185,3 @@ initToProps init = {
 }
 
 foreign import _attachShadow :: ShadowRootProps -> Element -> Effect ShadowRoot
-
--- | A wrapper for property names.
--- |
--- | The phantom type `value` describes the type of value which this property
--- | requires.
-newtype PropName :: Type -> Type
-newtype PropName value = PropName String
-
-derive instance newtypePropName :: Newtype (PropName value) _
-derive newtype instance eqPropName :: Eq (PropName value)
-derive newtype instance ordPropName :: Ord (PropName value)
-
--- | A wrapper for attribute names.
-newtype AttrName = AttrName String
-
-derive instance newtypeAttrName :: Newtype AttrName _
-derive newtype instance eqAttrName :: Eq AttrName
-derive newtype instance ordAttrName :: Ord AttrName
-
--- | A wrapper for strings which are used as CSS classes.
-newtype ClassName = ClassName String
-
-derive instance newtypeClassName :: Newtype ClassName _
-derive newtype instance eqClassName :: Eq ClassName
-derive newtype instance ordClassName :: Ord ClassName
-
--- | A wrapper for strings which are used as element identifiers.
-newtype ElementId = ElementId String
-
-derive instance newtypeElementId :: Newtype ElementId _
-derive newtype instance eqElementId :: Eq ElementId
-derive newtype instance ordElementId :: Ord ElementId

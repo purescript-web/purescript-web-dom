@@ -3,38 +3,39 @@ module Web.DOM.Attr
   , namespaceURI
   , prefix
   , localName
-  , name
   , getValue
   , setValue
   , ownerElement
   ) where
 
-import Prelude (Unit, map, (<<<))
+import Prelude
 
 import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toMaybe)
 import Effect (Effect)
+import Web.DOM.AttrName (AttrName)
 import Web.DOM.Internal.Types (Attr) as Exports
 import Web.DOM.Internal.Types (Attr, Element)
 
+foreign import _namespaceURI :: Attr -> Nullable String
 
-foreign import namespaceURI :: Attr -> Effect String
+namespaceURI :: Attr -> Maybe String
+namespaceURI attr = toMaybe (_namespaceURI attr)
 
-foreign import prefix :: Attr -> Effect String
+foreign import _prefix :: Attr -> Nullable String
 
-foreign import localName :: Attr -> Effect String
+prefix :: Attr -> Maybe String
+prefix attr = toMaybe (_prefix attr)
 
-foreign import name :: Attr -> Effect String
+foreign import localName :: Attr -> AttrName
 
 foreign import getValue :: Attr -> Effect String
 
 foreign import setValue :: Attr -> String -> Effect Unit
 
+foreign import _ownerElement :: Attr -> Effect (Nullable Element)
+
 -- | The element the attribute belongs to, unless the attribute is not (yet)
 -- | attached to an element.
 ownerElement :: Attr -> Effect (Maybe Element)
-ownerElement = map toMaybe <<< _ownerElement
-
-foreign import _ownerElement :: Attr -> Effect (Nullable Element)
-
-
+ownerElement attr = map toMaybe (_ownerElement attr)

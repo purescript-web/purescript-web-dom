@@ -8,7 +8,8 @@ import Prelude
 import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toMaybe)
 import Effect (Effect)
-import Web.DOM.Element (Element, ElementId)
+import Web.DOM.Element (Element)
+import Web.DOM.ElementId (ElementId)
 
 foreign import data NonElementParentNode :: Type
 
