@@ -1,3 +1,21 @@
+export const length = (list) => () => list.length;
+
+export function _item(list) {
+  return function(index) {
+    return function() {
+      return list.item(index);
+    };
+  };
+}
+
+export function contains(list) {
+  return function(token) {
+    return function() {
+      return list.contains(token);
+    };
+  };
+}
+
 export function add(list) {
   return function(token) {
     return function() {
@@ -10,14 +28,6 @@ export function remove(list) {
   return function(token) {
     return function() {
       return list.remove(token);
-    };
-  };
-}
-
-export function contains(list) {
-  return function(token) {
-    return function() {
-      return list.contains(token);
     };
   };
 }
@@ -40,14 +50,6 @@ export function toggleForce(list) {
   };
 }
 
-export function _item(list) {
-  return function(index) {
-    return function() {
-      return list.item(index);
-    };
-  };
-}
-
 export function replace(list) {
   return function(token) {
     return function(newToken) {
@@ -66,29 +68,26 @@ export function supports(list) {
   };
 }
 
-export function tokens(domTokenList) {
-  return function () {
-    var tokens = [];
-    var tokens_length = domTokenList.length;
-
-    for (var i = 0; i < tokens_length; i++) {
-      tokens.push(domTokenList.item(i));
-    }
-
-    return tokens;
+export function getValue(list) {
+  return function() {
+    return list.value;
   };
 }
 
 export function setValue(list) {
   return function(token) {
     return function() {
-      return list.setValue(token);
+      list.value = token;
     };
   };
 }
 
-export function getValue(list) {
-  return function() {
-    return list.getValue();
+export function tokens(list) {
+  return function () {
+    const result = [];
+    for (const token of list.tokens) {
+      result.push(token);
+    }
+    return result;
   };
 }
