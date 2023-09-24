@@ -42,11 +42,16 @@ module Web.DOM.Element
   , DOMRect
   , ShadowRootInit
   , attachShadow
+  , AttrName(..)
+  , ClassName(..)
+  , ElementId(..)
+  , PropName(..)
   ) where
 
 import Prelude
 
 import Data.Maybe (Maybe)
+import Data.Newtype (class Newtype)
 import Data.Nullable (Nullable, toMaybe, toNullable)
 import Effect (Effect)
 import Unsafe.Coerce (unsafeCoerce)
@@ -102,11 +107,11 @@ foreign import _prefix :: Element -> Nullable String
 foreign import localName :: Element -> String
 foreign import tagName :: Element -> String
 
-foreign import id :: Element -> Effect String
-foreign import setId :: String -> Element -> Effect Unit
-foreign import className :: Element -> Effect String
+foreign import id :: Element -> Effect ElementId
+foreign import setId :: ElementId -> Element -> Effect Unit
+foreign import className :: Element -> Effect ClassName
 foreign import classList :: Element -> Effect DOMTokenList
-foreign import setClassName :: String -> Element -> Effect Unit
+foreign import setClassName :: ClassName -> Element -> Effect Unit
 
 foreign import getElementsByTagName :: String -> Element -> Effect HTMLCollection
 
@@ -115,16 +120,16 @@ getElementsByTagNameNS = _getElementsByTagNameNS <<< toNullable
 
 foreign import _getElementsByTagNameNS :: Nullable String -> String -> Element -> Effect HTMLCollection
 
-foreign import getElementsByClassName :: String -> Element -> Effect HTMLCollection
+foreign import getElementsByClassName :: ClassName -> Element -> Effect HTMLCollection
 
-foreign import setAttribute :: String -> String -> Element -> Effect Unit
+foreign import setAttribute :: AttrName -> String -> Element -> Effect Unit
 
-getAttribute :: String -> Element -> Effect (Maybe String)
+getAttribute :: AttrName -> Element -> Effect (Maybe String)
 getAttribute attr = map toMaybe <<< _getAttribute attr
 
-foreign import _getAttribute :: String -> Element -> Effect (Nullable String)
-foreign import hasAttribute :: String -> Element -> Effect Boolean
-foreign import removeAttribute :: String -> Element -> Effect Unit
+foreign import _getAttribute :: AttrName -> Element -> Effect (Nullable String)
+foreign import hasAttribute :: AttrName -> Element -> Effect Boolean
+foreign import removeAttribute :: AttrName -> Element -> Effect Unit
 
 foreign import matches :: QuerySelector -> Element -> Effect Boolean
 
@@ -179,3 +184,35 @@ initToProps init = {
 }
 
 foreign import _attachShadow :: ShadowRootProps -> Element -> Effect ShadowRoot
+
+-- | A wrapper for property names.
+-- |
+-- | The phantom type `value` describes the type of value which this property
+-- | requires.
+newtype PropName :: Type -> Type
+newtype PropName value = PropName String
+
+derive instance newtypePropName :: Newtype (PropName value) _
+derive newtype instance eqPropName :: Eq (PropName value)
+derive newtype instance ordPropName :: Ord (PropName value)
+
+-- | A wrapper for attribute names.
+newtype AttrName = AttrName String
+
+derive instance newtypeAttrName :: Newtype AttrName _
+derive newtype instance eqAttrName :: Eq AttrName
+derive newtype instance ordAttrName :: Ord AttrName
+
+-- | A wrapper for strings which are used as CSS classes.
+newtype ClassName = ClassName String
+
+derive instance newtypeClassName :: Newtype ClassName _
+derive newtype instance eqClassName :: Eq ClassName
+derive newtype instance ordClassName :: Ord ClassName
+
+-- | A wrapper for strings which are used as element identifiers.
+newtype ElementId = ElementId String
+
+derive instance newtypeElementId :: Newtype ElementId _
+derive newtype instance eqElementId :: Eq ElementId
+derive newtype instance ordElementId :: Ord ElementId
