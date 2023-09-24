@@ -69,14 +69,7 @@ export function getElementsByClassName(classNames) {
   };
 }
 
-var getEffProp = function (name) {
-  return function (element) {
-    return function () {
-      return element[name];
-    };
-  };
-};
-export const attributes = getEffProp("attributes");
+export const attributes = (element) => () => element.attributes;
 
 export function setAttribute(name) {
   return function (value) {
