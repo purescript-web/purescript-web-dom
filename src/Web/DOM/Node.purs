@@ -45,6 +45,8 @@ import Web.DOM.Document (Document)
 import Web.DOM.Element (Element)
 import Web.DOM.Internal.Types (Node) as Exports
 import Web.DOM.Internal.Types (Node, NodeList)
+import Web.DOM.NamespacePrefix (NamespacePrefix(..))
+import Web.DOM.NamespaceURI (NamespaceURI(..))
 import Web.DOM.NodeType (NodeType)
 import Web.Event.EventTarget (EventTarget)
 import Web.Internal.FFI (unsafeReadProtoTagged)
@@ -163,17 +165,17 @@ foreign import compareDocumentPositionBits :: Node -> Node -> Effect Int
 -- | Checks whether the second node is contained within the first
 foreign import contains :: Node -> Node -> Effect Boolean
 
-lookupPrefix :: String -> Node -> Effect (Maybe String)
+lookupPrefix :: NamespaceURI -> Node -> Effect (Maybe NamespacePrefix)
 lookupPrefix p = map toMaybe <<< _lookupPrefix p
 
-foreign import _lookupPrefix :: String -> Node -> Effect (Nullable String)
+foreign import _lookupPrefix :: NamespaceURI -> Node -> Effect (Nullable NamespacePrefix)
 
-lookupNamespaceURI :: String -> Node -> Effect (Maybe String)
+lookupNamespaceURI :: NamespacePrefix -> Node -> Effect (Maybe NamespaceURI)
 lookupNamespaceURI ns = map toMaybe <<< _lookupNamespaceURI ns
 
-foreign import _lookupNamespaceURI :: String -> Node -> Effect (Nullable String)
+foreign import _lookupNamespaceURI :: NamespacePrefix -> Node -> Effect (Nullable NamespaceURI)
 
-foreign import isDefaultNamespace :: String -> Node -> Effect Boolean
+foreign import isDefaultNamespace :: NamespaceURI -> Node -> Effect Boolean
 
 -- | Inserts the first node before the second as a child of the third node.
 foreign import insertBefore :: Node -> Node -> Node -> Effect Unit

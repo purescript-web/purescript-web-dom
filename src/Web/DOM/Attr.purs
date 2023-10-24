@@ -16,15 +16,17 @@ import Effect (Effect)
 import Web.DOM.AttrName (AttrName)
 import Web.DOM.Internal.Types (Attr) as Exports
 import Web.DOM.Internal.Types (Attr, Element)
+import Web.DOM.NamespacePrefix (NamespacePrefix)
+import Web.DOM.NamespaceURI (NamespaceURI)
 
-foreign import _namespaceURI :: Attr -> Nullable String
+foreign import _namespaceURI :: Attr -> Nullable NamespaceURI
 
-namespaceURI :: Attr -> Maybe String
+namespaceURI :: Attr -> Maybe NamespaceURI
 namespaceURI attr = toMaybe (_namespaceURI attr)
 
-foreign import _prefix :: Attr -> Nullable String
+foreign import _prefix :: Attr -> Nullable NamespacePrefix
 
-prefix :: Attr -> Maybe String
+prefix :: Attr -> Maybe NamespacePrefix
 prefix attr = toMaybe (_prefix attr)
 
 foreign import localName :: Attr -> AttrName

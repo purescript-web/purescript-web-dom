@@ -18,10 +18,12 @@ export function getNamedItem(name) {
   };
 }
 
-export function getNamedItemNS(name) {
-  return function (namedNodeMap) {
-    return function () {
-      return namedNodeMap.getNamedItemNS(name);
+export function getNamedItemNS(namespace) {
+  return function (name) {
+    return function (namedNodeMap) {
+      return function () {
+        return namedNodeMap.getNamedItemNS(namespace, name);
+      };
     };
   };
 }
@@ -50,10 +52,12 @@ export function removeNamedItem(name) {
   };
 }
 
-export function removeNamedItemNS(namedNodeMap) {
-  return function (name) {
-    return function () {
-      return namedNodeMap.removeNamedItemNS(name);
+export function removeNamedItemNS(namespace) {
+  return function (namedNodeMap) {
+    return function (name) {
+      return function () {
+        return namedNodeMap.removeNamedItemNS(namespace, name);
+      };
     };
   };
 }

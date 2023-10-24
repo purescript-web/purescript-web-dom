@@ -58,6 +58,8 @@ import Web.DOM.DOMTokenList (DOMTokenList)
 import Web.DOM.ElementId (ElementId)
 import Web.DOM.Internal.Types (Element) as Exports
 import Web.DOM.Internal.Types (Element, HTMLCollection, Node, NamedNodeMap)
+import Web.DOM.NamespacePrefix (NamespacePrefix)
+import Web.DOM.NamespaceURI (NamespaceURI)
 import Web.DOM.NonDocumentTypeChildNode (NonDocumentTypeChildNode)
 import Web.DOM.ParentNode (ParentNode, QuerySelector)
 import Web.DOM.ParentNode (QuerySelector) as Exports
@@ -95,14 +97,14 @@ toParentNode = unsafeCoerce
 toEventTarget :: Element -> EventTarget
 toEventTarget = unsafeCoerce
 
-namespaceURI :: Element -> Maybe String
+namespaceURI :: Element -> Maybe NamespaceURI
 namespaceURI = toMaybe <<< _namespaceURI
 
-prefix :: Element -> Maybe String
+prefix :: Element -> Maybe NamespacePrefix
 prefix = toMaybe <<< _prefix
 
-foreign import _namespaceURI :: Element -> Nullable String
-foreign import _prefix :: Element -> Nullable String
+foreign import _namespaceURI :: Element -> Nullable NamespaceURI
+foreign import _prefix :: Element -> Nullable NamespacePrefix
 foreign import localName :: Element -> String
 foreign import tagName :: Element -> String
 

@@ -49,6 +49,7 @@ import Web.DOM.DocumentType (DocumentType)
 import Web.DOM.Element (Element)
 import Web.DOM.HTMLCollection (HTMLCollection)
 import Web.DOM.Internal.Types (Node)
+import Web.DOM.NamespaceURI (NamespaceURI(..))
 import Web.DOM.NonElementParentNode (NonElementParentNode)
 import Web.DOM.ParentNode (ParentNode)
 import Web.DOM.ProcessingInstruction (ProcessingInstruction)
@@ -101,18 +102,18 @@ foreign import _documentElement :: Document -> Effect (Nullable Element)
 
 foreign import getElementsByTagName :: String -> Document -> Effect HTMLCollection
 
-getElementsByTagNameNS :: Maybe String -> String -> Document -> Effect HTMLCollection
+getElementsByTagNameNS :: Maybe NamespaceURI -> String -> Document -> Effect HTMLCollection
 getElementsByTagNameNS = _getElementsByTagNameNS <<< toNullable
 
-foreign import _getElementsByTagNameNS :: Nullable String -> String -> Document -> Effect HTMLCollection
+foreign import _getElementsByTagNameNS :: Nullable NamespaceURI -> String -> Document -> Effect HTMLCollection
 foreign import getElementsByClassName :: String -> Document -> Effect HTMLCollection
 
 foreign import createElement :: String -> Document -> Effect Element
 
-createElementNS :: Maybe String -> String -> Document -> Effect Element
+createElementNS :: Maybe NamespaceURI -> String -> Document -> Effect Element
 createElementNS = _createElementNS <<< toNullable
 
-foreign import _createElementNS :: Nullable String -> String -> Document -> Effect Element
+foreign import _createElementNS :: Nullable NamespaceURI -> String -> Document -> Effect Element
 foreign import createDocumentFragment :: Document -> Effect DocumentFragment
 foreign import createTextNode :: String -> Document -> Effect Text
 foreign import createComment :: String -> Document -> Effect Comment
