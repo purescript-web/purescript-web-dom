@@ -1,60 +1,59 @@
+export const length = (namedNodeMap) => () => namedNodeMap.length;
+
 export function getAttributes(namedNodeMap) {
   return function () {
-    var attributes = [];
-    var attributes_length = namedNodeMap.length;
-
-    for (var i = 0; i < attributes_length; i++) {
-      attributes.push(namedNodeMap.item(i));
+    const result = [];
+    for (const attr of namedNodeMap) {
+      result.push(attr);
     }
-
-    return attributes;
+    return result;
   };
 }
 
-export function getNamedItem(namedNodeMap) {
-  return function (qualifiedName) {
+export function getNamedItem(name) {
+  return function (namedNodeMap) {
     return function () {
-      return namedNodeMap.getNamedItem(qualifiedName);
+      return namedNodeMap.getNamedItem(name);
     };
   };
 }
 
-export function getNamedItemNS(namedNodeMap) {
-  return function (qualifiedName) {
+export function getNamedItemNS(name) {
+  return function (namedNodeMap) {
     return function () {
-      return namedNodeMap.getNamedItemNS(qualifiedName);
+      return namedNodeMap.getNamedItemNS(name);
     };
   };
 }
 
-export function setNamedItem(namedNodeMap) {
-  return function (qualifiedName) {
+export function setNamedItem(name) {
+  return function (namedNodeMap) {
     return function () {
-      return namedNodeMap.setNamedItem(qualifiedName);
+      return namedNodeMap.setNamedItem(name);
     };
   };
 }
 
-export function setNamedItemNS(namedNodeMap) {
-  return function (qualifiedName) {
+export function setNamedItemNS(name) {
+  return function (namedNodeMap) {
     return function () {
-      return namedNodeMap.setNamedItemNS(qualifiedName);
+      return namedNodeMap.setNamedItemNS(name);
     };
   };
 }
 
-export function removeNamedItem(namedNodeMap) {
-  return function (qualifiedName) {
+export function removeNamedItem(name) {
+  return function (namedNodeMap) {
     return function () {
-      return namedNodeMap.removeNamedItem(qualifiedName);
+      return namedNodeMap.removeNamedItem(name);
     };
   };
 }
 
 export function removeNamedItemNS(namedNodeMap) {
-  return function (qualifiedName) {
+  return function (name) {
     return function () {
-      return namedNodeMap.removeNamedItemNS(qualifiedName);
+      return namedNodeMap.removeNamedItemNS(name);
     };
   };
 }
