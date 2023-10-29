@@ -9,7 +9,7 @@ var getEffProp = function (name) {
 export const url = getEffProp("URL");
 export const documentURI = getEffProp("documentURI");
 export const origin = getEffProp("origin");
-export const compatMode = getEffProp("compatMode");
+export const _compatMode = getEffProp("compatMode");
 export const characterSet = getEffProp("characterSet");
 export const contentType = getEffProp("contentType");
 export function _doctype(doc) {

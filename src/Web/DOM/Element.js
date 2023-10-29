@@ -69,6 +69,8 @@ export function getElementsByClassName(classNames) {
   };
 }
 
+export const attributes = (element) => () => element.attributes;
+
 export function setAttribute(name) {
   return function (value) {
     return function (element) {

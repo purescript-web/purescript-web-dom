@@ -22,6 +22,7 @@ module Web.DOM.Element
   , getElementsByTagName
   , getElementsByTagNameNS
   , getElementsByClassName
+  , attributes
   , setAttribute
   , getAttribute
   , hasAttribute
@@ -42,26 +43,27 @@ module Web.DOM.Element
   , DOMRect
   , ShadowRootInit
   , attachShadow
-  , AttrName(..)
-  , ClassName(..)
-  , ElementId(..)
-  , PropName(..)
   ) where
 
 import Prelude
 
 import Data.Maybe (Maybe)
-import Data.Newtype (class Newtype)
 import Data.Nullable (Nullable, toMaybe, toNullable)
 import Effect (Effect)
 import Unsafe.Coerce (unsafeCoerce)
+import Web.DOM.AttrName (AttrName)
 import Web.DOM.ChildNode (ChildNode)
+import Web.DOM.ClassName (ClassName)
 import Web.DOM.DOMTokenList (DOMTokenList)
+import Web.DOM.ElementId (ElementId)
+import Web.DOM.ElementName (ElementName)
 import Web.DOM.Internal.Types (Element) as Exports
-import Web.DOM.Internal.Types (Element, HTMLCollection, Node)
+import Web.DOM.Internal.Types (Element, HTMLCollection, Node, NamedNodeMap)
+import Web.DOM.NamespacePrefix (NamespacePrefix)
+import Web.DOM.NamespaceURI (NamespaceURI)
 import Web.DOM.NonDocumentTypeChildNode (NonDocumentTypeChildNode)
-import Web.DOM.ParentNode (QuerySelector) as Exports
 import Web.DOM.ParentNode (ParentNode, QuerySelector)
+import Web.DOM.ParentNode (QuerySelector) as Exports
 import Web.DOM.ShadowRoot (ShadowRoot, ShadowRootMode)
 import Web.Event.EventTarget (EventTarget)
 import Web.Internal.FFI (unsafeReadProtoTagged)
@@ -96,16 +98,16 @@ toParentNode = unsafeCoerce
 toEventTarget :: Element -> EventTarget
 toEventTarget = unsafeCoerce
 
-namespaceURI :: Element -> Maybe String
+namespaceURI :: Element -> Maybe NamespaceURI
 namespaceURI = toMaybe <<< _namespaceURI
 
-prefix :: Element -> Maybe String
+prefix :: Element -> Maybe NamespacePrefix
 prefix = toMaybe <<< _prefix
 
-foreign import _namespaceURI :: Element -> Nullable String
-foreign import _prefix :: Element -> Nullable String
-foreign import localName :: Element -> String
-foreign import tagName :: Element -> String
+foreign import _namespaceURI :: Element -> Nullable NamespaceURI
+foreign import _prefix :: Element -> Nullable NamespacePrefix
+foreign import localName :: Element -> ElementName
+foreign import tagName :: Element -> ElementName
 
 foreign import id :: Element -> Effect ElementId
 foreign import setId :: ElementId -> Element -> Effect Unit
@@ -113,14 +115,16 @@ foreign import className :: Element -> Effect ClassName
 foreign import classList :: Element -> Effect DOMTokenList
 foreign import setClassName :: ClassName -> Element -> Effect Unit
 
-foreign import getElementsByTagName :: String -> Element -> Effect HTMLCollection
+foreign import getElementsByTagName :: ElementName -> Element -> Effect HTMLCollection
 
-getElementsByTagNameNS :: Maybe String -> String -> Element -> Effect HTMLCollection
+getElementsByTagNameNS :: Maybe NamespaceURI -> ElementName -> Element -> Effect HTMLCollection
 getElementsByTagNameNS = _getElementsByTagNameNS <<< toNullable
 
-foreign import _getElementsByTagNameNS :: Nullable String -> String -> Element -> Effect HTMLCollection
+foreign import _getElementsByTagNameNS :: Nullable NamespaceURI -> ElementName -> Element -> Effect HTMLCollection
 
 foreign import getElementsByClassName :: ClassName -> Element -> Effect HTMLCollection
+
+foreign import attributes :: Element -> Effect NamedNodeMap
 
 foreign import setAttribute :: AttrName -> String -> Element -> Effect Unit
 
@@ -164,55 +168,23 @@ type DOMRect =
 
 foreign import getBoundingClientRect :: Element -> Effect DOMRect
 
-type ShadowRootInit = {
-  mode :: ShadowRootMode,
-  delegatesFocus :: Boolean
-}
+type ShadowRootInit =
+  { mode :: ShadowRootMode
+  , delegatesFocus :: Boolean
+  }
 
 attachShadow :: ShadowRootInit -> Element -> Effect ShadowRoot
 attachShadow = _attachShadow <<< initToProps
 
-type ShadowRootProps = {
-  mode :: String,
-  delegatesFocus :: Boolean
-}
+type ShadowRootProps =
+  { mode :: String
+  , delegatesFocus :: Boolean
+  }
 
 initToProps :: ShadowRootInit -> ShadowRootProps
-initToProps init = {
-  mode: show init.mode,
-  delegatesFocus: init.delegatesFocus
-}
+initToProps init =
+  { mode: show init.mode
+  , delegatesFocus: init.delegatesFocus
+  }
 
 foreign import _attachShadow :: ShadowRootProps -> Element -> Effect ShadowRoot
-
--- | A wrapper for property names.
--- |
--- | The phantom type `value` describes the type of value which this property
--- | requires.
-newtype PropName :: Type -> Type
-newtype PropName value = PropName String
-
-derive instance newtypePropName :: Newtype (PropName value) _
-derive newtype instance eqPropName :: Eq (PropName value)
-derive newtype instance ordPropName :: Ord (PropName value)
-
--- | A wrapper for attribute names.
-newtype AttrName = AttrName String
-
-derive instance newtypeAttrName :: Newtype AttrName _
-derive newtype instance eqAttrName :: Eq AttrName
-derive newtype instance ordAttrName :: Ord AttrName
-
--- | A wrapper for strings which are used as CSS classes.
-newtype ClassName = ClassName String
-
-derive instance newtypeClassName :: Newtype ClassName _
-derive newtype instance eqClassName :: Eq ClassName
-derive newtype instance ordClassName :: Ord ClassName
-
--- | A wrapper for strings which are used as element identifiers.
-newtype ElementId = ElementId String
-
-derive instance newtypeElementId :: Newtype ElementId _
-derive newtype instance eqElementId :: Eq ElementId
-derive newtype instance ordElementId :: Ord ElementId
