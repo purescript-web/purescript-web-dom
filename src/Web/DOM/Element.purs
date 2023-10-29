@@ -56,6 +56,7 @@ import Web.DOM.ChildNode (ChildNode)
 import Web.DOM.ClassName (ClassName)
 import Web.DOM.DOMTokenList (DOMTokenList)
 import Web.DOM.ElementId (ElementId)
+import Web.DOM.ElementName (ElementName)
 import Web.DOM.Internal.Types (Element) as Exports
 import Web.DOM.Internal.Types (Element, HTMLCollection, Node, NamedNodeMap)
 import Web.DOM.NamespacePrefix (NamespacePrefix)
@@ -105,8 +106,8 @@ prefix = toMaybe <<< _prefix
 
 foreign import _namespaceURI :: Element -> Nullable NamespaceURI
 foreign import _prefix :: Element -> Nullable NamespacePrefix
-foreign import localName :: Element -> String
-foreign import tagName :: Element -> String
+foreign import localName :: Element -> ElementName
+foreign import tagName :: Element -> ElementName
 
 foreign import id :: Element -> Effect ElementId
 foreign import setId :: ElementId -> Element -> Effect Unit
@@ -114,12 +115,12 @@ foreign import className :: Element -> Effect ClassName
 foreign import classList :: Element -> Effect DOMTokenList
 foreign import setClassName :: ClassName -> Element -> Effect Unit
 
-foreign import getElementsByTagName :: String -> Element -> Effect HTMLCollection
+foreign import getElementsByTagName :: ElementName -> Element -> Effect HTMLCollection
 
-getElementsByTagNameNS :: Maybe String -> String -> Element -> Effect HTMLCollection
+getElementsByTagNameNS :: Maybe NamespaceURI -> ElementName -> Element -> Effect HTMLCollection
 getElementsByTagNameNS = _getElementsByTagNameNS <<< toNullable
 
-foreign import _getElementsByTagNameNS :: Nullable String -> String -> Element -> Effect HTMLCollection
+foreign import _getElementsByTagNameNS :: Nullable NamespaceURI -> ElementName -> Element -> Effect HTMLCollection
 
 foreign import getElementsByClassName :: ClassName -> Element -> Effect HTMLCollection
 
@@ -167,23 +168,23 @@ type DOMRect =
 
 foreign import getBoundingClientRect :: Element -> Effect DOMRect
 
-type ShadowRootInit = {
-  mode :: ShadowRootMode,
-  delegatesFocus :: Boolean
-}
+type ShadowRootInit =
+  { mode :: ShadowRootMode
+  , delegatesFocus :: Boolean
+  }
 
 attachShadow :: ShadowRootInit -> Element -> Effect ShadowRoot
 attachShadow = _attachShadow <<< initToProps
 
-type ShadowRootProps = {
-  mode :: String,
-  delegatesFocus :: Boolean
-}
+type ShadowRootProps =
+  { mode :: String
+  , delegatesFocus :: Boolean
+  }
 
 initToProps :: ShadowRootInit -> ShadowRootProps
-initToProps init = {
-  mode: show init.mode,
-  delegatesFocus: init.delegatesFocus
-}
+initToProps init =
+  { mode: show init.mode
+  , delegatesFocus: init.delegatesFocus
+  }
 
 foreign import _attachShadow :: ShadowRootProps -> Element -> Effect ShadowRoot

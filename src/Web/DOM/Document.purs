@@ -39,17 +39,21 @@ module Web.DOM.Document
 
 import Prelude
 
-import Data.Maybe (Maybe)
+import Data.Maybe (Maybe, fromMaybe)
 import Data.Nullable (Nullable, toMaybe, toNullable)
 import Effect (Effect)
 import Unsafe.Coerce (unsafeCoerce)
+import Web.DOM.ClassName (ClassName)
 import Web.DOM.Comment (Comment)
+import Web.DOM.Document.CompatMode (CompatMode)
+import Web.DOM.Document.CompatMode as CompatMode
 import Web.DOM.DocumentFragment (DocumentFragment)
 import Web.DOM.DocumentType (DocumentType)
 import Web.DOM.Element (Element)
+import Web.DOM.ElementName (ElementName)
 import Web.DOM.HTMLCollection (HTMLCollection)
 import Web.DOM.Internal.Types (Node)
-import Web.DOM.NamespaceURI (NamespaceURI(..))
+import Web.DOM.NamespaceURI (NamespaceURI)
 import Web.DOM.NonElementParentNode (NonElementParentNode)
 import Web.DOM.ParentNode (ParentNode)
 import Web.DOM.ProcessingInstruction (ProcessingInstruction)
@@ -86,7 +90,12 @@ toEventTarget = unsafeCoerce
 foreign import url :: Document -> Effect String
 foreign import documentURI :: Document -> Effect String
 foreign import origin :: Document -> Effect String
-foreign import compatMode :: Document -> Effect String
+
+foreign import _compatMode :: Document -> Effect String
+
+compatMode :: Document -> Effect CompatMode
+compatMode doc = fromMaybe CompatMode.CSS1Compat <<< CompatMode.parse <$> _compatMode doc
+
 foreign import characterSet :: Document -> Effect String
 foreign import contentType :: Document -> Effect String
 
@@ -100,20 +109,20 @@ documentElement = map toMaybe <<< _documentElement
 
 foreign import _documentElement :: Document -> Effect (Nullable Element)
 
-foreign import getElementsByTagName :: String -> Document -> Effect HTMLCollection
+foreign import getElementsByTagName :: ElementName -> Document -> Effect HTMLCollection
 
-getElementsByTagNameNS :: Maybe NamespaceURI -> String -> Document -> Effect HTMLCollection
+getElementsByTagNameNS :: Maybe NamespaceURI -> ElementName -> Document -> Effect HTMLCollection
 getElementsByTagNameNS = _getElementsByTagNameNS <<< toNullable
 
-foreign import _getElementsByTagNameNS :: Nullable NamespaceURI -> String -> Document -> Effect HTMLCollection
-foreign import getElementsByClassName :: String -> Document -> Effect HTMLCollection
+foreign import _getElementsByTagNameNS :: Nullable NamespaceURI -> ElementName -> Document -> Effect HTMLCollection
+foreign import getElementsByClassName :: ClassName -> Document -> Effect HTMLCollection
 
-foreign import createElement :: String -> Document -> Effect Element
+foreign import createElement :: ElementName -> Document -> Effect Element
 
-createElementNS :: Maybe NamespaceURI -> String -> Document -> Effect Element
+createElementNS :: Maybe NamespaceURI -> ElementName -> Document -> Effect Element
 createElementNS = _createElementNS <<< toNullable
 
-foreign import _createElementNS :: Nullable NamespaceURI -> String -> Document -> Effect Element
+foreign import _createElementNS :: Nullable NamespaceURI -> ElementName -> Document -> Effect Element
 foreign import createDocumentFragment :: Document -> Effect DocumentFragment
 foreign import createTextNode :: String -> Document -> Effect Text
 foreign import createComment :: String -> Document -> Effect Comment
