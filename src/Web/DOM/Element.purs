@@ -43,6 +43,11 @@ module Web.DOM.Element
   , DOMRect
   , ShadowRootInit
   , attachShadow
+  , scrollIntoView
+  , scrollIntoViewWithOptions
+  , ScrollBehavior(..)
+  , ScrollLogicalPosition(..)
+  , ScrollIntoViewOptions
   ) where
 
 import Prelude
@@ -188,3 +193,56 @@ initToProps init =
   }
 
 foreign import _attachShadow :: ShadowRootProps -> Element -> Effect ShadowRoot
+
+-- | Scrolls the element's ancestor containers so that the element is visible,
+-- | using the default alignment (`element.scrollIntoView()`).
+foreign import scrollIntoView :: Element -> Effect Unit
+
+-- | How the scroll is animated.
+data ScrollBehavior = Auto | Instant | Smooth
+
+derive instance Eq ScrollBehavior
+
+-- | Where the element is aligned within the scrollport.
+data ScrollLogicalPosition = Start | Center | End | Nearest
+
+derive instance Eq ScrollLogicalPosition
+
+type ScrollIntoViewOptions =
+  { behavior :: ScrollBehavior
+  , block :: ScrollLogicalPosition
+  , inline :: ScrollLogicalPosition
+  }
+
+-- | Scrolls the element into view with the given behavior and alignment
+-- | (`element.scrollIntoView(options)`).
+scrollIntoViewWithOptions :: ScrollIntoViewOptions -> Element -> Effect Unit
+scrollIntoViewWithOptions = _scrollIntoViewWithOptions <<< optionsToProps
+
+type ScrollIntoViewProps =
+  { behavior :: String
+  , block :: String
+  , inline :: String
+  }
+
+optionsToProps :: ScrollIntoViewOptions -> ScrollIntoViewProps
+optionsToProps options =
+  { behavior: behaviorToString options.behavior
+  , block: logicalPositionToString options.block
+  , inline: logicalPositionToString options.inline
+  }
+
+behaviorToString :: ScrollBehavior -> String
+behaviorToString = case _ of
+  Auto -> "auto"
+  Instant -> "instant"
+  Smooth -> "smooth"
+
+logicalPositionToString :: ScrollLogicalPosition -> String
+logicalPositionToString = case _ of
+  Start -> "start"
+  Center -> "center"
+  End -> "end"
+  Nearest -> "nearest"
+
+foreign import _scrollIntoViewWithOptions :: ScrollIntoViewProps -> Element -> Effect Unit

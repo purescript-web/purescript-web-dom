@@ -210,3 +210,17 @@ export function _attachShadow(props) {
     };
   };
 }
+
+export function scrollIntoView(el) {
+  return function () {
+    el.scrollIntoView();
+  };
+}
+
+export function _scrollIntoViewWithOptions(props) {
+  return function (el) {
+    return function () {
+      el.scrollIntoView(props);
+    };
+  };
+}
