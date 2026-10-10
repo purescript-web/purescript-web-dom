@@ -76,6 +76,12 @@ export function isEqualNode(node1) {
   };
 }
 
+export function isSameNode(node1) {
+  return function (node2) {
+    return node1.isSameNode(node2);
+  };
+}
+
 export function compareDocumentPositionBits(node1) {
   return function (node2) {
     return function () {

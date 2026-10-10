@@ -23,6 +23,7 @@ module Web.DOM.Node
   , clone
   , deepClone
   , isEqualNode
+  , isSameNode
   , compareDocumentPositionBits
   , contains
   , lookupPrefix
@@ -156,6 +157,9 @@ foreign import deepClone :: Node -> Effect Node
 
 -- | Checks whether two nodes are equivalent.
 foreign import isEqualNode :: Node -> Node -> Effect Boolean
+
+-- | Checks whether two nodes are the same.
+foreign import isSameNode :: Node -> Node -> Boolean
 
 -- TODO: compareDocumentPosition that returns a semigroup or something instead of the bitmask value
 

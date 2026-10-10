@@ -14,6 +14,7 @@ Breaking changes:
 - The `getAttribute`, `setAttribute`, `hasAttribute`, and `removeAttribute` functions are parameterized by `AttrName` instead of `String`. (#58 by @nsaunders)
 
 New features:
+- Added `isSameNode` function. (#44 by @wclr)
 - `AttrName`, `ClassName`, and `PropName` types have been added, migrated from [web-html](https://github.com/purescript-web/purescript-web-html). (#58 by @nsaunders)
 - A new `ElementId` type, representing the value of an `id` property/attribute, has been added. (#58 by @nsaunders)
 - `scrollIntoView` and `scrollIntoViewWithOptions` (with typed `ScrollBehavior` and `ScrollLogicalPosition`) have been added. (#64 by @i-am-the-slime)
