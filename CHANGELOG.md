@@ -4,24 +4,30 @@ Notable changes to this project are documented in this file. The format is based
 
 ## [Unreleased]
 
+## [v7.0.0](https://github.com/purescript-web/purescript-web-dom/releases/tag/v7.0.0) - 2026-10-10
+
 Breaking changes:
-- The `scrollWidth` and `scrollHeight` functions return `Int` instead of `Number`. (#55)
+- The `scrollWidth` and `scrollHeight` functions return `Int` instead of `Number`. (#65, fixes #55)
 - The `id` function returns an `ElementId` instead of a `String`. (#58 by @nsaunders)
 - The `setId` function is parameterized by `ElementId` instead of `String`. (#58 by @nsaunders)
 - The `getElementById` function is parameterized by `ElementId` instead of `String`. (#58 by @nsaunders)
 - The `className` function returns a `ClassName` instead of a `String`. (#58 by @nsaunders)
 - The `setClassName` and `getElementsByClassName` functions are parameterized by `ClassName` instead of `String`. (#58 by @nsaunders)
 - The `getAttribute`, `setAttribute`, `hasAttribute`, and `removeAttribute` functions are parameterized by `AttrName` instead of `String`. (#58 by @nsaunders)
+- Element name and namespace APIs in `Element` and `Document` use `ElementName`, `NamespaceURI`, and `NamespacePrefix` instead of `String`. (#59)
+- Namespace lookup APIs in `Node` use `NamespaceURI` and `NamespacePrefix` instead of `String`. (#59)
+- `MutationRecord.attributeName` and `attributeNamespace` return `AttrName` and `NamespaceURI` values instead of strings. (#59)
+- `Document.compatMode` returns `CompatMode` instead of `String`. (#59)
 
 New features:
 - Added `isSameNode` function. (#44 by @wclr)
 - `AttrName`, `ClassName`, and `PropName` types have been added, migrated from [web-html](https://github.com/purescript-web/purescript-web-html). (#58 by @nsaunders)
 - A new `ElementId` type, representing the value of an `id` property/attribute, has been added. (#58 by @nsaunders)
+- Added `Attr` and `NamedNodeMap` modules, `Element.attributes`, and additional `DOMTokenList` operations. (#59)
 - `scrollIntoView` and `scrollIntoViewWithOptions` (with typed `ScrollBehavior` and `ScrollLogicalPosition`) have been added. (#64 by @i-am-the-slime)
 
-Bugfixes:
-
 Other improvements:
+- Migrated Bower/Pulp development to Spago with unchanged published dependency bounds, and updated CI and formatting tools. (#66)
 
 ## [v6.0.0](https://github.com/purescript-web/purescript-web-dom/releases/tag/v6.0.0) - 2022-04-27
 
