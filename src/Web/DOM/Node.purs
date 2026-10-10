@@ -104,7 +104,6 @@ firstChild = map toMaybe <<< _firstChild
 
 foreign import _firstChild :: Node -> Effect (Nullable Node)
 
-
 -- | The last child of the node, or Nothing if the node has no children.
 lastChild :: Node -> Effect (Maybe Node)
 lastChild = map toMaybe <<< _lastChild
