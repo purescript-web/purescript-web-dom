@@ -35,7 +35,7 @@ instance boundedEnumNodeType :: BoundedEnum NodeType where
   cardinality = Cardinality 12
   toEnum = toEnumNodeType
   fromEnum = fromEnumNodeType
- 
+
 instance showNodeType :: Show NodeType where
   show ElementNode = "ElementNode"
   show AttributeNode = "AttributeNode"

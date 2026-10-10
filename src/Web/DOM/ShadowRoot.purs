@@ -1,6 +1,6 @@
 module Web.DOM.ShadowRoot
   ( ShadowRoot
-  , ShadowRootMode (..)
+  , ShadowRootMode(..)
   , toNode
   , host
   , mode
@@ -26,10 +26,10 @@ instance showShadowRootMode :: Show ShadowRootMode where
 mode :: ShadowRoot -> Maybe ShadowRootMode
 mode = modeFromString <<< _mode
   where
-    modeFromString = case _ of
-      "open" -> Just Open
-      "closed" -> Just Closed
-      _ -> Nothing
+  modeFromString = case _ of
+    "open" -> Just Open
+    "closed" -> Just Closed
+    _ -> Nothing
 
 foreign import host :: ShadowRoot -> Effect Element
 foreign import _mode :: ShadowRoot -> String

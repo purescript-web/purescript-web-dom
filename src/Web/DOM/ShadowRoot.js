@@ -3,7 +3,7 @@ export function _mode(el) {
 }
 
 export function host(el) {
-  return function() {
+  return function () {
     return el.host;
   };
 }
