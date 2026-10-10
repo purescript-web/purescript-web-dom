@@ -153,8 +153,8 @@ foreign import setScrollTop :: Number -> Element -> Effect Unit
 foreign import scrollLeft :: Element -> Effect Number
 foreign import setScrollLeft :: Number -> Element -> Effect Unit
 
-foreign import scrollWidth :: Element -> Effect Number
-foreign import scrollHeight :: Element -> Effect Number
+foreign import scrollWidth :: Element -> Effect Int
+foreign import scrollHeight :: Element -> Effect Int
 foreign import clientTop :: Element -> Effect Number
 foreign import clientLeft :: Element -> Effect Number
 foreign import clientWidth :: Element -> Effect Number
