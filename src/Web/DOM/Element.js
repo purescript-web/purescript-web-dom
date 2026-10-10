@@ -106,7 +106,7 @@ export function removeAttribute(name) {
 }
 
 export function matches(selector) {
-  return function(element) {
+  return function (element) {
     return function () {
       return element.matches(selector);
     };
@@ -114,7 +114,7 @@ export function matches(selector) {
 }
 
 export function _closest(selector) {
-  return function(element) {
+  return function (element) {
     return function () {
       return element.closest(selector);
     };
@@ -198,14 +198,14 @@ export function getBoundingClientRect(el) {
       width: rect.width,
       height: rect.height,
       x: rect.x,
-      y: rect.y
+      y: rect.y,
     };
   };
 }
 
 export function _attachShadow(props) {
   return function (el) {
-    return function() {
+    return function () {
       return el.attachShadow(props);
     };
   };
