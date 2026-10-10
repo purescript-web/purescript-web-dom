@@ -15,6 +15,6 @@
     "package.json"
   ],
   "dependencies": {
-    "purescript-web-events": "^3.0.0"
+    "purescript-web-events": "^4.0.0"
   }
 }

@@ -1,7 +1,5 @@
-"use strict";
-
-exports.remove = function (node) {
+export function remove(node) {
   return function () {
     return node.remove();
   };
-};
+}

@@ -1,29 +1,27 @@
-"use strict";
-
-exports.length = function (list) {
+export function length(list) {
   return function () {
     return list.length;
   };
-};
+}
 
-exports.toArray = function (list) {
+export function toArray(list) {
   return function () {
     return [].slice.call(list);
   };
-};
+}
 
-exports._item = function (index) {
+export function _item(index) {
   return function (list) {
     return function () {
       return list.item(index);
     };
   };
-};
+}
 
-exports._namedItem = function (name) {
+export function _namedItem(name) {
   return function (list) {
     return function () {
       return list.namedItem(name);
     };
   };
-};
+}

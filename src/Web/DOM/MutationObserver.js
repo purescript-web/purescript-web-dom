@@ -1,14 +1,12 @@
-"use strict";
-
-exports.mutationObserver = function (cb) {
+export function mutationObserver(cb) {
   return function () {
     return new MutationObserver(function (mr, mo) {
       return cb(mr)(mo)();
     });
   };
-};
+}
 
-exports._observe = function (node) {
+export function _observe(node) {
   return function (config) {
     return function (mo) {
       return function () {
@@ -16,16 +14,16 @@ exports._observe = function (node) {
       };
     };
   };
-};
+}
 
-exports.disconnect = function (mo) {
+export function disconnect(mo) {
   return function () {
     return mo.disconnect();
   };
-};
+}
 
-exports.takeRecords = function (mo) {
+export function takeRecords(mo) {
   return function () {
     return mo.takeRecords();
   };
-};
+}

@@ -22,6 +22,7 @@ module Web.DOM.Element
   , getElementsByTagName
   , getElementsByTagNameNS
   , getElementsByClassName
+  , attributes
   , setAttribute
   , getAttribute
   , hasAttribute
@@ -38,8 +39,15 @@ module Web.DOM.Element
   , clientLeft
   , clientWidth
   , clientHeight
+  , getBoundingClientRect
+  , DOMRect
   , ShadowRootInit
   , attachShadow
+  , scrollIntoView
+  , scrollIntoViewWithOptions
+  , ScrollBehavior(..)
+  , ScrollLogicalPosition(..)
+  , ScrollIntoViewOptions
   ) where
 
 import Prelude
@@ -48,13 +56,19 @@ import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toMaybe, toNullable)
 import Effect (Effect)
 import Unsafe.Coerce (unsafeCoerce)
+import Web.DOM.AttrName (AttrName)
 import Web.DOM.ChildNode (ChildNode)
+import Web.DOM.ClassName (ClassName)
 import Web.DOM.DOMTokenList (DOMTokenList)
+import Web.DOM.ElementId (ElementId)
+import Web.DOM.ElementName (ElementName)
 import Web.DOM.Internal.Types (Element) as Exports
-import Web.DOM.Internal.Types (Element, HTMLCollection, Node)
+import Web.DOM.Internal.Types (Element, HTMLCollection, Node, NamedNodeMap)
+import Web.DOM.NamespacePrefix (NamespacePrefix)
+import Web.DOM.NamespaceURI (NamespaceURI)
 import Web.DOM.NonDocumentTypeChildNode (NonDocumentTypeChildNode)
-import Web.DOM.ParentNode (QuerySelector) as Exports
 import Web.DOM.ParentNode (ParentNode, QuerySelector)
+import Web.DOM.ParentNode (QuerySelector) as Exports
 import Web.DOM.ShadowRoot (ShadowRoot, ShadowRootMode)
 import Web.Event.EventTarget (EventTarget)
 import Web.Internal.FFI (unsafeReadProtoTagged)
@@ -89,40 +103,42 @@ toParentNode = unsafeCoerce
 toEventTarget :: Element -> EventTarget
 toEventTarget = unsafeCoerce
 
-namespaceURI :: Element -> Maybe String
+namespaceURI :: Element -> Maybe NamespaceURI
 namespaceURI = toMaybe <<< _namespaceURI
 
-prefix :: Element -> Maybe String
+prefix :: Element -> Maybe NamespacePrefix
 prefix = toMaybe <<< _prefix
 
-foreign import _namespaceURI :: Element -> Nullable String
-foreign import _prefix :: Element -> Nullable String
-foreign import localName :: Element -> String
-foreign import tagName :: Element -> String
+foreign import _namespaceURI :: Element -> Nullable NamespaceURI
+foreign import _prefix :: Element -> Nullable NamespacePrefix
+foreign import localName :: Element -> ElementName
+foreign import tagName :: Element -> ElementName
 
-foreign import id :: Element -> Effect String
-foreign import setId :: String -> Element -> Effect Unit
-foreign import className :: Element -> Effect String
+foreign import id :: Element -> Effect ElementId
+foreign import setId :: ElementId -> Element -> Effect Unit
+foreign import className :: Element -> Effect ClassName
 foreign import classList :: Element -> Effect DOMTokenList
-foreign import setClassName :: String -> Element -> Effect Unit
+foreign import setClassName :: ClassName -> Element -> Effect Unit
 
-foreign import getElementsByTagName :: String -> Element -> Effect HTMLCollection
+foreign import getElementsByTagName :: ElementName -> Element -> Effect HTMLCollection
 
-getElementsByTagNameNS :: Maybe String -> String -> Element -> Effect HTMLCollection
+getElementsByTagNameNS :: Maybe NamespaceURI -> ElementName -> Element -> Effect HTMLCollection
 getElementsByTagNameNS = _getElementsByTagNameNS <<< toNullable
 
-foreign import _getElementsByTagNameNS :: Nullable String -> String -> Element -> Effect HTMLCollection
+foreign import _getElementsByTagNameNS :: Nullable NamespaceURI -> ElementName -> Element -> Effect HTMLCollection
 
-foreign import getElementsByClassName :: String -> Element -> Effect HTMLCollection
+foreign import getElementsByClassName :: ClassName -> Element -> Effect HTMLCollection
 
-foreign import setAttribute :: String -> String -> Element -> Effect Unit
+foreign import attributes :: Element -> Effect NamedNodeMap
 
-getAttribute :: String -> Element -> Effect (Maybe String)
+foreign import setAttribute :: AttrName -> String -> Element -> Effect Unit
+
+getAttribute :: AttrName -> Element -> Effect (Maybe String)
 getAttribute attr = map toMaybe <<< _getAttribute attr
 
-foreign import _getAttribute :: String -> Element -> Effect (Nullable String)
-foreign import hasAttribute :: String -> Element -> Effect Boolean
-foreign import removeAttribute :: String -> Element -> Effect Unit
+foreign import _getAttribute :: AttrName -> Element -> Effect (Nullable String)
+foreign import hasAttribute :: AttrName -> Element -> Effect Boolean
+foreign import removeAttribute :: AttrName -> Element -> Effect Unit
 
 foreign import matches :: QuerySelector -> Element -> Effect Boolean
 
@@ -137,30 +153,96 @@ foreign import setScrollTop :: Number -> Element -> Effect Unit
 foreign import scrollLeft :: Element -> Effect Number
 foreign import setScrollLeft :: Number -> Element -> Effect Unit
 
-foreign import scrollWidth :: Element -> Effect Number
-foreign import scrollHeight :: Element -> Effect Number
+foreign import scrollWidth :: Element -> Effect Int
+foreign import scrollHeight :: Element -> Effect Int
 foreign import clientTop :: Element -> Effect Number
 foreign import clientLeft :: Element -> Effect Number
 foreign import clientWidth :: Element -> Effect Number
 foreign import clientHeight :: Element -> Effect Number
 
-type ShadowRootInit = {
-  mode :: ShadowRootMode,
-  delegatesFocus :: Boolean
-}
+type DOMRect =
+  { top :: Number
+  , right :: Number
+  , bottom :: Number
+  , left :: Number
+  , width :: Number
+  , height :: Number
+  , x :: Number
+  , y :: Number
+  }
+
+foreign import getBoundingClientRect :: Element -> Effect DOMRect
+
+type ShadowRootInit =
+  { mode :: ShadowRootMode
+  , delegatesFocus :: Boolean
+  }
 
 attachShadow :: ShadowRootInit -> Element -> Effect ShadowRoot
 attachShadow = _attachShadow <<< initToProps
 
-type ShadowRootProps = {
-  mode :: String,
-  delegatesFocus :: Boolean
-}
+type ShadowRootProps =
+  { mode :: String
+  , delegatesFocus :: Boolean
+  }
 
 initToProps :: ShadowRootInit -> ShadowRootProps
-initToProps init = {
-  mode: show init.mode,
-  delegatesFocus: init.delegatesFocus
-}
+initToProps init =
+  { mode: show init.mode
+  , delegatesFocus: init.delegatesFocus
+  }
 
 foreign import _attachShadow :: ShadowRootProps -> Element -> Effect ShadowRoot
+
+-- | Scrolls the element's ancestor containers so that the element is visible,
+-- | using the default alignment (`element.scrollIntoView()`).
+foreign import scrollIntoView :: Element -> Effect Unit
+
+-- | How the scroll is animated.
+data ScrollBehavior = Auto | Instant | Smooth
+
+derive instance Eq ScrollBehavior
+
+-- | Where the element is aligned within the scrollport.
+data ScrollLogicalPosition = Start | Center | End | Nearest
+
+derive instance Eq ScrollLogicalPosition
+
+type ScrollIntoViewOptions =
+  { behavior :: ScrollBehavior
+  , block :: ScrollLogicalPosition
+  , inline :: ScrollLogicalPosition
+  }
+
+-- | Scrolls the element into view with the given behavior and alignment
+-- | (`element.scrollIntoView(options)`).
+scrollIntoViewWithOptions :: ScrollIntoViewOptions -> Element -> Effect Unit
+scrollIntoViewWithOptions = _scrollIntoViewWithOptions <<< optionsToProps
+
+type ScrollIntoViewProps =
+  { behavior :: String
+  , block :: String
+  , inline :: String
+  }
+
+optionsToProps :: ScrollIntoViewOptions -> ScrollIntoViewProps
+optionsToProps options =
+  { behavior: behaviorToString options.behavior
+  , block: logicalPositionToString options.block
+  , inline: logicalPositionToString options.inline
+  }
+
+behaviorToString :: ScrollBehavior -> String
+behaviorToString = case _ of
+  Auto -> "auto"
+  Instant -> "instant"
+  Smooth -> "smooth"
+
+logicalPositionToString :: ScrollLogicalPosition -> String
+logicalPositionToString = case _ of
+  Start -> "start"
+  Center -> "center"
+  End -> "end"
+  Nearest -> "nearest"
+
+foreign import _scrollIntoViewWithOptions :: ScrollIntoViewProps -> Element -> Effect Unit

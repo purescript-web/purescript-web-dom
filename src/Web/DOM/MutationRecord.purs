@@ -15,11 +15,13 @@ module Web.DOM.MutationRecord
 
 import Prelude
 
-import Effect (Effect)
-import Web.DOM.Node (Node)
-import Web.DOM.NodeList (NodeList)
 import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toMaybe)
+import Effect (Effect)
+import Web.DOM.AttrName (AttrName)
+import Web.DOM.NamespaceURI (NamespaceURI)
+import Web.DOM.Node (Node)
+import Web.DOM.NodeList (NodeList)
 
 foreign import data MutationRecord :: Type
 
@@ -54,14 +56,14 @@ foreign import _previousSibling :: MutationRecord -> Effect (Nullable Node)
 previousSibling :: MutationRecord -> Effect (Maybe Node)
 previousSibling = map toMaybe <<< _previousSibling
 
-foreign import _attributeName :: MutationRecord -> Effect (Nullable String)
+foreign import _attributeName :: MutationRecord -> Effect (Nullable AttrName)
 
-attributeName :: MutationRecord -> Effect (Maybe String)
+attributeName :: MutationRecord -> Effect (Maybe AttrName)
 attributeName = map toMaybe <<< _attributeName
 
-foreign import _attributeNamespace :: MutationRecord -> Effect (Nullable String)
+foreign import _attributeNamespace :: MutationRecord -> Effect (Nullable NamespaceURI)
 
-attributeNamespace :: MutationRecord -> Effect (Maybe String)
+attributeNamespace :: MutationRecord -> Effect (Maybe NamespaceURI)
 attributeNamespace = map toMaybe <<< _attributeNamespace
 
 foreign import _oldValue :: MutationRecord -> Effect (Nullable String)

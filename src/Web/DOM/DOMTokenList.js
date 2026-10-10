@@ -1,38 +1,46 @@
-"use strict";
+export const length = (list) => () => list.length;
 
-exports.add = function(list) {
-  return function(token) {
+export function _item(list) {
+  return function(index) {
     return function() {
-      return list.add(token);
+      return list.item(index);
     };
   };
-};
+}
 
-exports.remove = function(list) {
-  return function(token) {
-    return function() {
-      return list.remove(token);
-    };
-  };
-};
-
-exports.contains = function(list) {
+export function contains(list) {
   return function(token) {
     return function() {
       return list.contains(token);
     };
   };
-};
+}
 
-exports.toggle = function(list) {
+export function add(list) {
+  return function(token) {
+    return function() {
+      return list.add(token);
+    };
+  };
+}
+
+export function remove(list) {
+  return function(token) {
+    return function() {
+      return list.remove(token);
+    };
+  };
+}
+
+export function toggle(list) {
   return function(token) {
     return function() {
       return list.toggle(token);
     };
   };
-};
+}
 
-exports.toggleForce = function(list) {
+export function toggleForce(list) {
   return function(token) {
     return function(force) {
       return function() {
@@ -40,12 +48,46 @@ exports.toggleForce = function(list) {
       };
     };
   };
-};
+}
 
-exports._item = function(list) {
-  return function(index) {
-    return function() {
-      return list.item(index);
+export function replace(list) {
+  return function(token) {
+    return function(newToken) {
+      return function() {
+        return list.replace(token, newToken);
+      };
     };
   };
-};
+}
+
+export function supports(list) {
+  return function(token) {
+    return function() {
+      return list.supports(token);
+    };
+  };
+}
+
+export function getValue(list) {
+  return function() {
+    return list.value;
+  };
+}
+
+export function setValue(list) {
+  return function(token) {
+    return function() {
+      list.value = token;
+    };
+  };
+}
+
+export function tokens(list) {
+  return function () {
+    const result = [];
+    for (const token of list.tokens) {
+      result.push(token);
+    }
+    return result;
+  };
+}
