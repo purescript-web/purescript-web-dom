@@ -5,6 +5,7 @@ Notable changes to this project are documented in this file. The format is based
 ## [Unreleased]
 
 Breaking changes:
+- The `scrollWidth` and `scrollHeight` functions return `Int` instead of `Number`. (#55)
 - The `id` function returns an `ElementId` instead of a `String`. (#58 by @nsaunders)
 - The `setId` function is parameterized by `ElementId` instead of `String`. (#58 by @nsaunders)
 - The `getElementById` function is parameterized by `ElementId` instead of `String`. (#58 by @nsaunders)
